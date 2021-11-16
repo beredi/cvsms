@@ -14,135 +14,26 @@
                 <th>{{__('messages.admin.menu.customers.customer.email')}}</th>
                 <th>{{__('messages.admin.menu.customers.customer.id_card')}}</th>
                 <th>{{__('messages.admin.menu.customers.customer.owe')}}</th>
+                <th>{{__('messages.admin.general.edit')}}</th>
+                <th>{{__('messages.admin.general.delete')}}</th>
             </tr>
         </thead>
         <tbody>
+        @if($customers)
+            @foreach($customers as $customer)
             <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
+                <td>{{$customer->name}}</td>
+                <td>{{$customer->lastname}}</td>
+                <td>{{$customer->phone}}</td>
+                <td>{{$customer->address}}</td>
+                <td>{{$customer->email}}</td>
+                <td>{{$customer->id_card}}</td>
+                <td>{{$customer->owe}}</td>
+                <td class="text-center"><a href="#" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
+                <td class="text-center"><a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Lastname</td>
-                <td>+381 66666</td>
-                <td>Test Street 333</td>
-                <td>test@test</td>
-                <td>123456</td>
-                <td>1211</td>
-            </tr>
+            @endforeach
+        @endif
         </tbody>
     </table>
 

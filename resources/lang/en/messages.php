@@ -44,7 +44,9 @@ return [
             ]
         ],
         'general' => [
-            'search-for' => 'Search for...'
+            'search-for' => 'Search for...',
+            'edit' => 'Edit',
+            'delete' => 'Delete'
         ]
     ]
 
