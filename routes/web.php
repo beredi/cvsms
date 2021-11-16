@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
     return view('admin.index');
-})->name('admin');
+})->name('admin')->middleware('auth');;
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers.show');

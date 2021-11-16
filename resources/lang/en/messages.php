@@ -20,7 +20,16 @@ return [
             'customers' => [
                 'name' => 'Customers',
                 'new-record' => 'Add customer',
-                'all-records' => 'All customers'
+                'all-records' => 'All customers',
+                'customer' => [
+                    'name' => 'Name',
+                    'lastname' => 'Lastname',
+                    'phone' => 'Phone number',
+                    'email' => 'Email',
+                    'address' => 'Address',
+                    'id_card' => 'Card ID',
+                    'owe' => 'Owe'
+                ]
             ],
             'employees' => [
                 'name' => 'Employees',
@@ -34,7 +43,7 @@ return [
                 'logout' => 'Logout'
             ]
         ],
-        "general" => [
+        'general' => [
             'search-for' => 'Search for...'
         ]
     ]
