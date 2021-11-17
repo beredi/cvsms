@@ -1,41 +1,72 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="float-left">{{__('messages.admin.menu.customers.all-records')}}</h2>
+            <a href="{{route('customers.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus"></i> {{__('messages.admin.menu.customers.new-record')}}</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id='all-customers' class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>{{__('messages.admin.menu.customers.customer.name')}}</th>
+                        <th>{{__('messages.admin.menu.customers.customer.lastname')}}</th>
+                        <th>{{__('messages.admin.menu.customers.customer.phone')}}</th>
+                        <th>{{__('messages.admin.menu.customers.customer.address')}}</th>
+                        <th>{{__('messages.admin.menu.customers.customer.email')}}</th>
+                        <th>{{__('messages.admin.menu.customers.customer.id_card')}}</th>
+                        <th>{{__('messages.admin.menu.customers.customer.owe')}}</th>
+                        <th>{{__('messages.admin.general.edit')}}</th>
+                        <th>{{__('messages.admin.general.delete')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if($customers)
+                    @foreach($customers as $customer)
+                    <tr>
+                        <td>{{$customer->name}}</td>
+                        <td>{{$customer->lastname}}</td>
+                        <td>{{$customer->phone}}</td>
+                        <td>{{$customer->address}}</td>
+                        <td>{{$customer->email}}</td>
+                        <td>{{$customer->id_card}}</td>
+                        <td>{{$customer->owe}}</td>
+                        <td class="text-center"><a href="{{route('customers.edit', ['customer' => $customer->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
+                        <td class="text-center"><a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></a></td>
+                    </tr>
+                    @endforeach
+                @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <h1>{{__('messages.admin.menu.customers.all-records')}}</h1>
-
-    <table id='all-customers' class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>{{__('messages.admin.menu.customers.customer.name')}}</th>
-                <th>{{__('messages.admin.menu.customers.customer.lastname')}}</th>
-                <th>{{__('messages.admin.menu.customers.customer.phone')}}</th>
-                <th>{{__('messages.admin.menu.customers.customer.address')}}</th>
-                <th>{{__('messages.admin.menu.customers.customer.email')}}</th>
-                <th>{{__('messages.admin.menu.customers.customer.id_card')}}</th>
-                <th>{{__('messages.admin.menu.customers.customer.owe')}}</th>
-                <th>{{__('messages.admin.general.edit')}}</th>
-                <th>{{__('messages.admin.general.delete')}}</th>
-            </tr>
-        </thead>
-        <tbody>
-        @if($customers)
-            @foreach($customers as $customer)
-            <tr>
-                <td>{{$customer->name}}</td>
-                <td>{{$customer->lastname}}</td>
-                <td>{{$customer->phone}}</td>
-                <td>{{$customer->address}}</td>
-                <td>{{$customer->email}}</td>
-                <td>{{$customer->id_card}}</td>
-                <td>{{$customer->owe}}</td>
-                <td class="text-center"><a href="#" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
-                <td class="text-center"><a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
-            </tr>
-            @endforeach
-        @endif
-        </tbody>
-    </table>
+    <!-- Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('messages.admin.general.delete')}}?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">{{__('messages.admin.menu.customers.delete_customer', ['name' => $customer->name, 'lastname' => $customer->lastname])}}</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">{{__('messages.admin.general.cancel')}}</button>
+                    <a class="btn btn-danger" href="#" onclick="event.preventDefault();document.getElementById('delete-form').submit();">{{__('messages.admin.general.delete')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="delete-form" action="{{route('customers.delete', ['customer' => $customer->id])}}" method="POST" class="d-none">
+        @method('DELETE')
+        @csrf
+    </form>
 
 @endsection
 

@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
             $table->text('address');
             $table->string('phone');
             $table->string('email')->unique();
-            $table->bigInteger('id_card');
+            $table->bigInteger('id_card')->nullable();
             $table->double('owe')->nullable();
             $table->timestamps();
         });

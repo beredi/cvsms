@@ -17,12 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin')->middleware('auth');;
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers.show');
+
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+//    Customers
+    Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers.all');
+    Route::get('/customers/add',[\App\Http\Controllers\CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/customers/store',[\App\Http\Controllers\CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customers/edit/{customer}',[\App\Http\Controllers\CustomerController::class, 'edit'])->name('customers.edit');
+    Route::patch('/customers/update/{customer}',[\App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customers/delete/{customer}',[\App\Http\Controllers\CustomerController::class, 'destroy'])->name('customers.delete');
+
+
+    Route::get('/', function () {
+        return view('admin.index');
+    })->name('admin');
+});

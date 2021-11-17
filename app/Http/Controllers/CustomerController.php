@@ -24,18 +24,41 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.customer.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validate($request, [
+            'name' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required|min:6',
+            'email' => 'required|email|unique:customers,email',
+            'address' => 'required',
+            'id_card' => 'nullable|integer|gt:0',
+            'owe' => 'nullable|numeric'
+        ],[
+            'name.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.name')]),
+            'lastname.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.lastname')]),
+            'phone.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.phone')]),
+            'email.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.email')]),
+            'address.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.address')]),
+            'id_card.integer' => __('messages.admin.validator.integer', ['field' => __('messages.admin.menu.customers.customer.id_card')]),
+            'id_card.gt' => __('messages.admin.validator.positive_number', ['field' => __('messages.admin.menu.customers.customer.id_card')]),
+            'owe.numeric' => __('messages.admin.validator.numeric', ['field' => __('messages.admin.menu.customers.customer.owe')])
+        ]);
+        if ($validated){
+            Customer::create($request->all());
+        }
+
+        return redirect(route('customers.all'));
     }
 
     /**
@@ -57,7 +80,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('admin.customer.edit', ['customer' => $customer]);
     }
 
     /**
@@ -69,7 +92,30 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validated = $this->validate($request, [
+            'name' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required|min:6',
+            'email' => 'required|email|unique:customers,email,'.$customer->id,
+            'address' => 'required',
+            'id_card' => 'nullable|integer|gt:0',
+            'owe' => 'nullable|numeric'
+        ],[
+            'name.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.name')]),
+            'lastname.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.lastname')]),
+            'phone.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.phone')]),
+            'email.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.email')]),
+            'address.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.address')]),
+            'id_card.integer' => __('messages.admin.validator.integer', ['field' => __('messages.admin.menu.customers.customer.id_card')]),
+            'id_card.gt' => __('messages.admin.validator.positive_number', ['field' => __('messages.admin.menu.customers.customer.id_card')]),
+            'owe.numeric' => __('messages.admin.validator.numeric', ['field' => __('messages.admin.menu.customers.customer.owe')])
+        ]);
+        if ($validated){
+            $customer->update($request->all());
+        }
+
+
+        return redirect(route('customers.all'));
     }
 
     /**
@@ -80,6 +126,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return redirect(route('customers.all'));
     }
 }
