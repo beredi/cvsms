@@ -100,6 +100,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="role">{{ __('messages.admin.menu.employees.employee.user-role') }}</label>
+                    <div class="control-group">
+                        <select name="role" required id="role" placeholder="{{__('messages.admin.general.search-for')}}">
+                            <option value=""></option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->slug}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                         <button type="submit" class="btn btn-primary">
                             {{ __('messages.admin.menu.employees.new-record') }}
                         </button>
@@ -108,4 +120,13 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $(function (){
+
+            $('#role').selectize();
+        });
+    </script>
 @endsection

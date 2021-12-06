@@ -65,7 +65,9 @@ return [
             'search-for' => 'Search for...',
             'edit' => 'Edit',
             'delete' => 'Delete',
-            'cancel' => 'Cancel'
+            'cancel' => 'Cancel',
+            'date' => 'Date',
+            'message' => 'Message'
         ],
         'validator' => [
             'required' => 'The field :field is required.',

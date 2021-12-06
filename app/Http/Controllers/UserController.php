@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.employee.create');
+        return view('admin.employee.create', ['roles' => Role::all()]);
     }
 
     /**
@@ -44,6 +44,7 @@ class UserController extends Controller
              'lastname' => ['required', 'string', 'max:255'],
              'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
              'password' => ['required', 'string', 'min:8', 'confirmed'],
+             'role' => ['required']
          ]);
         if ($validated){
            $user = User::create([
@@ -55,6 +56,8 @@ class UserController extends Controller
                 'phone' => $request['phone'],
                 'address' => $request['address']
             ]);
+            $user->role()->associate(Role::where(['slug' => $request['role']])->firstOrFail());
+            $user->save();
             session()->flash('employee-created', __('messages.admin.menu.employees.created_employee', ['name' => $user->name, 'lastname' => $user->lastname]));
         }
 

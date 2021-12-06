@@ -41,6 +41,9 @@
     <x-admin-addons></x-admin-addons>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+    <x-admin.nav.changelog></x-admin.nav.changelog>
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

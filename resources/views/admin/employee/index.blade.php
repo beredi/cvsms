@@ -43,6 +43,7 @@
                     <th>{{__('messages.admin.menu.customers.customer.phone')}}</th>
                     <th>{{__('messages.admin.menu.customers.customer.address')}}</th>
                     <th>{{__('messages.admin.menu.employees.employee.employed_from')}}</th>
+                    <th>{{__('messages.admin.menu.employees.employee.user-role')}}</th>
                     <th>{{__('messages.admin.general.edit')}}</th>
                     <th>{{__('messages.admin.general.delete')}}</th>
                 </tr>
@@ -57,6 +58,7 @@
                             <td>{{$employee->phone}}</td>
                             <td>{{$employee->address}}</td>
                             <td>{{date('d. m. Y', strtotime($employee->employed_from))}}</td>
+                            <td>{{$employee->role->name}}</td>
                             <td class="text-center"><a href="{{route('employees.edit', ['user' => $employee->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
                             <td class="text-center"><a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$employee->id}}"><i class="fas fa-trash-alt"></i></a>
 

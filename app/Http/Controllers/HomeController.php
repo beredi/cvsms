@@ -25,4 +25,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function changelog(){
+        return view('admin.changelog.index');
+    }
 }
