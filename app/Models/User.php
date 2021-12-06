@@ -50,4 +50,18 @@ class User extends Authenticatable
     public function getNameAttribute($value){
         return $value;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions(){
+        return $this->belongsToMany(Permission::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
 }

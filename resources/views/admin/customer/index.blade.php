@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if(\Illuminate\Support\Facades\Session::has('customer-deleted'))
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                {{ \Illuminate\Support\Facades\Session::get('customer-deleted') }}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <h2 class="float-left">{{__('messages.admin.menu.customers.all-records')}}</h2>
@@ -24,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($customers)
+                @if($customers->isNotEmpty())
                     @foreach($customers as $customer)
                     <tr>
                         <td>{{$customer->name}}</td>
@@ -35,7 +44,33 @@
                         <td>{{$customer->id_card}}</td>
                         <td>{{$customer->owe}}</td>
                         <td class="text-center"><a href="{{route('customers.edit', ['customer' => $customer->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
-                        <td class="text-center"><a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></a></td>
+                        <td class="text-center"><a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$customer->id}}"><i class="fas fa-trash-alt"></i></a>
+
+                            <!-- Delete Modal-->
+                            <div class="modal fade" id="deleteModal{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{__('messages.admin.general.delete')}}?</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">{{__('messages.admin.menu.customers.delete_customer', ['name' => $customer->name, 'lastname' => $customer->lastname])}}</div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">{{__('messages.admin.general.cancel')}}</button>
+                                            <a class="btn btn-danger" href="#" onclick="event.preventDefault();document.getElementById('delete-form'+{{$customer->id}}).submit();">{{__('messages.admin.general.delete')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form id="delete-form{{$customer->id}}" action="{{route('customers.delete', ['customer' => $customer->id])}}" method="POST" class="d-none">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+
+                        </td>
                     </tr>
                     @endforeach
                 @endif
@@ -43,30 +78,6 @@
             </table>
         </div>
     </div>
-
-    <!-- Delete Modal-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{__('messages.admin.general.delete')}}?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">{{__('messages.admin.menu.customers.delete_customer', ['name' => $customer->name, 'lastname' => $customer->lastname])}}</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">{{__('messages.admin.general.cancel')}}</button>
-                    <a class="btn btn-danger" href="#" onclick="event.preventDefault();document.getElementById('delete-form').submit();">{{__('messages.admin.general.delete')}}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <form id="delete-form" action="{{route('customers.delete', ['customer' => $customer->id])}}" method="POST" class="d-none">
-        @method('DELETE')
-        @csrf
-    </form>
 
 @endsection
 

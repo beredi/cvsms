@@ -31,7 +31,8 @@ return [
                     'id_card' => 'Card ID',
                     'owe' => 'Owe'
                 ],
-                'delete_customer' => 'Are you sure that you want to delete customer: :name :lastname ?'
+                'delete_customer' => 'Are you sure that you want to delete customer: :name :lastname ?',
+                'deleted_customer' => 'Customer :name :lastname was successful deleted'
             ],
             'employees' => [
                 'name' => 'Employees',

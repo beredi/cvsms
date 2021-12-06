@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class CustomerController extends Controller
 {
@@ -127,6 +128,8 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete();
+        session()->flash('customer-deleted', __('messages.admin.menu.customers.deleted_customer', ['name' => $customer->name, 'lastname' => $customer->lastname]));
+        //dd(\Illuminate\Support\Facades\Session::get('customer-deleted'));
 
         return redirect(route('customers.all'));
     }
