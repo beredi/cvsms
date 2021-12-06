@@ -9,6 +9,22 @@
             </div>
         </div>
     </div>
+    @elseif(\Illuminate\Support\Facades\Session::has('customer-updated'))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    {{ \Illuminate\Support\Facades\Session::get('customer-updated') }}
+                </div>
+            </div>
+        </div>
+    @elseif(\Illuminate\Support\Facades\Session::has('customer-created'))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    {{ \Illuminate\Support\Facades\Session::get('customer-created') }}
+                </div>
+            </div>
+        </div>
     @endif
     <div class="row">
         <div class="col-md-12">

@@ -5,14 +5,14 @@
 </div>
 
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('employees.create')}}">
         <i class="fas fa-plus"></i>
         <span>{{ __('messages.admin.menu.employees.new-record')}}</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('employees.all')}}">
         <i class="fas fa-list"></i>
         <span>{{ __('messages.admin.menu.employees.all-records')}}</span>
     </a>

@@ -19,8 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastname',
         'email',
         'password',
+        'employed_from',
+        'address',
+        'phone'
     ];
 
     /**
@@ -48,6 +52,14 @@ class User extends Authenticatable
      * @return mixed
      */
     public function getNameAttribute($value){
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getLastnameAttribute($value){
         return $value;
     }
 

@@ -33,6 +33,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/customers/update/{customer}',[\App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers/delete/{customer}',[\App\Http\Controllers\CustomerController::class, 'destroy'])->name('customers.delete');
 
+    Route::get('/employees', [\App\Http\Controllers\UserController::class, 'index'])->name('employees.all');
+    Route::get('/employees/add',[\App\Http\Controllers\UserController::class, 'create'])->name('employees.create');
+    Route::post('/employees/store',[\App\Http\Controllers\UserController::class, 'store'])->name('employees.store');
+    Route::get('/employees/edit/{user}',[\App\Http\Controllers\UserController::class, 'edit'])->name('employees.edit');
+    Route::patch('/employees/update/{user}',[\App\Http\Controllers\UserController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/delete/{user}',[\App\Http\Controllers\UserController::class, 'destroy'])->name('employees.delete');
 
     Route::get('/', function () {
         return view('admin.index');

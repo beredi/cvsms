@@ -56,7 +56,8 @@ class CustomerController extends Controller
             'owe.numeric' => __('messages.admin.validator.numeric', ['field' => __('messages.admin.menu.customers.customer.owe')])
         ]);
         if ($validated){
-            Customer::create($request->all());
+            $customer = Customer::create($request->all());
+            session()->flash('customer-created', __('messages.admin.menu.customers.created_customer', ['name' => $customer->name, 'lastname' => $customer->lastname]));
         }
 
         return redirect(route('customers.all'));
@@ -113,6 +114,8 @@ class CustomerController extends Controller
         ]);
         if ($validated){
             $customer->update($request->all());
+            session()->flash('customer-updated', __('messages.admin.menu.customers.updated_customer', ['name' => $customer->name, 'lastname' => $customer->lastname]));
+
         }
 
 
@@ -129,7 +132,6 @@ class CustomerController extends Controller
     {
         $customer->delete();
         session()->flash('customer-deleted', __('messages.admin.menu.customers.deleted_customer', ['name' => $customer->name, 'lastname' => $customer->lastname]));
-        //dd(\Illuminate\Support\Facades\Session::get('customer-deleted'));
 
         return redirect(route('customers.all'));
     }

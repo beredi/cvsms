@@ -32,12 +32,24 @@ return [
                     'owe' => 'Owe'
                 ],
                 'delete_customer' => 'Are you sure that you want to delete customer: :name :lastname ?',
-                'deleted_customer' => 'Customer :name :lastname was successful deleted'
+                'deleted_customer' => 'Customer :name :lastname was successful deleted',
+                'updated_customer' => 'Customer :name :lastname was successful updated',
+                'created_customer' => 'Customer :name :lastname was successful created'
             ],
             'employees' => [
                 'name' => 'Employees',
                 'new-record' => 'Add employee',
-                'all-records' => 'All employees'
+                'all-records' => 'All employees',
+                'update-record' => 'Update customer',
+                'employee' => [
+                    'employed_from' => 'Employed from',
+                    'password' => 'Password',
+                    'password_confirm' => 'Confirm Password',
+                ],
+                'delete_employee' => 'Are you sure that you want to delete employee: :name :lastname ?',
+                'deleted_employee' => 'Employee :name :lastname was successful deleted',
+                'created_employee' => 'Employee :name :lastname was successful created',
+                'updated_employee' => 'Employee :name :lastname was successful updated'
             ],
             'user' => [
                 'profile' => 'Profile',
