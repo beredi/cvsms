@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +16,13 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
         \App\Models\Customer::factory(50)->create();
+        Role::create([
+            'name' => 'Administrator',
+            'slug' => 'admin'
+        ]);
+        Role::create([
+            'name' => 'User',
+            'slug' => 'user'
+        ]);
     }
 }

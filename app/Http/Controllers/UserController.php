@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -64,9 +67,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('admin.employee.show', ['user' => $user]);
     }
 
     /**
@@ -77,7 +80,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.employee.edit', ['employee' => $user]);
+        if(Auth::user()->canEdit(User::class, Auth::user()) || $user->id == Auth::user()->id){
+            return view('admin.employee.edit', ['employee' => $user, 'roles' => Role::all()]);
+        }
+        else {
+            throw new AuthorizationException('ahojky');
+        }
     }
 
     /**
@@ -93,7 +101,8 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'password' => ['nullable', 'confirmed']
+            'password' => ['nullable', 'confirmed'],
+            'role' => ['nullable']
         ]);
         if($validated){
             $user->name = $request['name'];
@@ -104,6 +113,11 @@ class UserController extends Controller
             $user->employed_from = $request['employed_from'];
             if(!empty($request['password'])){
                 $user->password = Hash::make($request['password']);
+            }
+            if(!empty($request['role'])){
+                if (!$user->hasRole($request['role'])) {
+                    $user->role()->associate(Role::where(['slug' => $request['role']])->firstOrFail());
+                }
             }
 
             $user->save();

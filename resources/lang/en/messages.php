@@ -40,11 +40,12 @@ return [
                 'name' => 'Employees',
                 'new-record' => 'Add employee',
                 'all-records' => 'All employees',
-                'update-record' => 'Update customer',
+                'update-record' => 'Update employee',
                 'employee' => [
                     'employed_from' => 'Employed from',
                     'password' => 'Password',
                     'password_confirm' => 'Confirm Password',
+                    'user-role' => 'User role'
                 ],
                 'delete_employee' => 'Are you sure that you want to delete employee: :name :lastname ?',
                 'deleted_employee' => 'Employee :name :lastname was successful deleted',

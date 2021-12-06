@@ -23,8 +23,13 @@ class CreateUsersTable extends Migration
             $table->date('employed_from');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->unsignedInteger('role_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 

@@ -11,6 +11,9 @@ class Role extends Model
 
     protected $guarded = [];
 
+    public const ADMIN = 'admin';
+    public const USER = 'user';
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -22,6 +25,15 @@ class Role extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class);
+    }
+
+    public function hasPermission($permissionSlug){
+        $result = false;
+        foreach ($this->permissions as $permission){
+            if ($permission->slug == $permissionSlug) $result = true;
+        }
+
+        return $result;
     }
 }

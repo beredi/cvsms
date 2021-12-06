@@ -35,6 +35,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/employees', [\App\Http\Controllers\UserController::class, 'index'])->name('employees.all');
     Route::get('/employees/add',[\App\Http\Controllers\UserController::class, 'create'])->name('employees.create');
+    Route::get('/employees/show/{user}',[\App\Http\Controllers\UserController::class, 'show'])->name('employees.show');
     Route::post('/employees/store',[\App\Http\Controllers\UserController::class, 'store'])->name('employees.store');
     Route::get('/employees/edit/{user}',[\App\Http\Controllers\UserController::class, 'edit'])->name('employees.edit');
     Route::patch('/employees/update/{user}',[\App\Http\Controllers\UserController::class, 'update'])->name('employees.update');

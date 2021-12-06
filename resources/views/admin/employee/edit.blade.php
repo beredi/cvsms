@@ -100,6 +100,24 @@
                     @enderror
                 </div>
 
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole(\App\Models\Role::ADMIN))
+                <div class="form-group">
+                    <label for="role">{{ __('messages.admin.menu.employees.employee.user-role') }}</label>
+                    <div class="control-group">
+                        <select name="role" required id="role" placeholder="{{__('messages.admin.general.search-for')}}">
+                            <option value=""></option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->slug}}"
+                                @if($employee->role->slug == $role->slug)
+                                    selected
+                                @endif
+                                >{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                @endif
+
                 <div class="form-group">
                         <button type="submit" class="btn btn-primary">
                             {{ __('messages.admin.menu.employees.update-record') }}
@@ -109,4 +127,13 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+    $(function (){
+
+        $('#role').selectize();
+    });
+    </script>
 @endsection
