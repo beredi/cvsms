@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'Admin',
             'email' => 'test@test',
             'password' => bcrypt('test@test'),
-            'employed_from' => date('Y-m-d', strtotime('now'))
+            'employed_from' => date('Y-m-d', strtotime('now')),
+            'role_id' => 1
         ]);
     }
 }
