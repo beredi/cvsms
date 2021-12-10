@@ -34,5 +34,14 @@ class DatabaseSeeder extends Seeder
             'employed_from' => date('Y-m-d', strtotime('now')),
             'role_id' => 1
         ]);
+
+        User::create([
+            'name' => 'Test',
+            'lastname' => 'User',
+            'email' => 'user@user',
+            'password' => bcrypt('user@user'),
+            'employed_from' => date('Y-m-d', strtotime('now')),
+            'role_id' => 2
+        ]);
     }
 }
