@@ -29,7 +29,9 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="float-left">{{__('messages.admin.menu.employees.all-records')}}</h2>
+            @can('create', \App\Models\User::class)
             <a href="{{route('employees.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus"></i> {{__('messages.admin.menu.employees.new-record')}}</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -59,8 +61,14 @@
                             <td>{{$employee->address}}</td>
                             <td>{{date('d. m. Y', strtotime($employee->employed_from))}}</td>
                             <td>{{$employee->role->name}}</td>
-                            <td class="text-center"><a href="{{route('employees.edit', ['user' => $employee->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$employee->id}}"><i class="fas fa-trash-alt"></i></a>
+                            <td class="text-center">
+                                @can('update', $employee)
+                                <a href="{{route('employees.edit', ['user' => $employee->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                @endcan
+                            </td>
+                            <td class="text-center">
+                                @can('delete', \App\Models\User::class)
+                                <a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$employee->id}}"><i class="fas fa-trash-alt"></i></a>
 
                                 <!-- Delete Modal-->
                                 <div class="modal fade" id="deleteModal{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -86,6 +94,7 @@
                                     @csrf
                                 </form>
 
+                            @endcan
                             </td>
                         </tr>
                     @endforeach

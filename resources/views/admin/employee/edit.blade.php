@@ -69,7 +69,11 @@
 
                 <div class="form-group">
                     <label for="employed_from">{{ __('messages.admin.menu.employees.employee.employed_from') }}</label>
+                    @if(auth()->user()->hasRole(\App\Models\Role::ADMIN))
                     <input id="employed_from" type="date" class="form-control @error('employed_from') is-invalid @enderror" name="employed_from" value="{{$employee->employed_from}}">
+                    @else
+                        <p class="font-weight-bold text-dark">{{date('d.M.Y',strtotime($employee->employed_from))}}</p>
+                    @endif
 
                     @error('employed_from')
                     <span class="invalid-feedback" role="alert">

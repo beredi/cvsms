@@ -2,3 +2,10 @@
     content:"*";
     color: #fd7575;
 }
+
+.user{
+    color: #1a1919;
+}
+.user:hover {
+    color: #656ba2;
+}

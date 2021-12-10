@@ -15,6 +15,18 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * PERMISSIONS
+     */
+
+    public static $permissions = array(
+        'VIEW_USER' => 'View user',
+        'VIEW_ALL_USER' => 'View all users',
+        'EDIT_USER' => 'Edit user',
+        'DELETE_USER' => 'Delete user',
+        'CREATE_USER' => 'Create user'
+    );
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]
@@ -101,18 +113,6 @@ class User extends Authenticatable
     public function hasPermission($permission){
         $result = false;
         if ($this->role->hasPermission($permission)) $result = true;
-
-        return $result;
-    }
-
-    /**
-     * @param User $user
-     * @return bool
-     */
-    public function canEdit($class, User $user){
-        $result = false;
-        if ($user->hasRole(Role::ADMIN)
-            || $user->role->hasPermission(\Illuminate\Support\Str::upper($class.'_EDIT'))) $result = true;
 
         return $result;
     }

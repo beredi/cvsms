@@ -18,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.employee.index', ['employees' => User::all()]);
+        $users = (Auth::user()->cannot('viewAny', User::class)) ? User::where('id', Auth::user()->id)->get() : User::all();
+        return view('admin.employee.index', ['employees' => $users]);
     }
 
     /**
@@ -28,6 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
         return view('admin.employee.create', ['roles' => Role::all()]);
     }
 
@@ -72,6 +74,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
         return view('admin.employee.show', ['user' => $user]);
     }
 
@@ -83,7 +86,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if(Auth::user()->canEdit(User::class, Auth::user()) || $user->id == Auth::user()->id){
+        if($this->authorize('update', $user)){
             return view('admin.employee.edit', ['employee' => $user, 'roles' => Role::all()]);
         }
         else {
@@ -137,6 +140,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
         $user->delete();
         session()->flash('employee-deleted', __('messages.admin.menu.employees.deleted_employee', ['name' => $user->name, 'lastname' => $user->lastname]));
 

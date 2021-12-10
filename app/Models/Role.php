@@ -31,7 +31,10 @@ class Role extends Model
     public function hasPermission($permissionSlug){
         $result = false;
         foreach ($this->permissions as $permission){
-            if ($permission->slug == $permissionSlug) $result = true;
+            if ($permission->slug == $permissionSlug) {
+            $result = true;
+            break;
+            }
         }
 
         return $result;
