@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@test',
             'password' => bcrypt('test@test'),
             'employed_from' => date('Y-m-d', strtotime('now')),
-            'role_id' => 1
+            'role_id' => Role::findOrFail(1)->first()->id
         ]);
 
         User::create([
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@user',
             'password' => bcrypt('user@user'),
             'employed_from' => date('Y-m-d', strtotime('now')),
-            'role_id' => 2
+            'role_id' => Role::findOrFail(2)->first()->id
         ]);
     }
 }
