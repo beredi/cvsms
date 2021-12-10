@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,14 @@ class DatabaseSeeder extends Seeder
         Role::create([
             'name' => 'User',
             'slug' => 'user'
+        ]);
+
+        User::create([
+            'name' => 'Test',
+            'lastname' => 'Admin',
+            'email' => 'test@test',
+            'password' => bcrypt('test@test'),
+            'employed_from' => date()
         ]);
     }
 }
