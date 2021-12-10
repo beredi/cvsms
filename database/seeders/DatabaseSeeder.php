@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -15,8 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
-        \App\Models\Customer::factory(50)->create();
         Role::create([
             'name' => 'Administrator',
             'slug' => 'admin'
@@ -32,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@test',
             'password' => bcrypt('test@test'),
             'employed_from' => date('Y-m-d', strtotime('now')),
-            'role_id' => Role::findOrFail(1)->first()->id
+            'role_id' => Role::where('slug', 'admin')->first()->id
         ]);
 
         User::create([
@@ -41,7 +40,23 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@user',
             'password' => bcrypt('user@user'),
             'employed_from' => date('Y-m-d', strtotime('now')),
-            'role_id' => Role::findOrFail(2)->first()->id
+            'role_id' => Role::where('slug', 'user')->first()->id
         ]);
+
+        $userPermissions = User::$permissions;
+        foreach ($userPermissions as $slug => $name){
+            Permission::create([
+                'name' => $name,
+                'slug' => $slug
+            ]);
+        }
+
+        foreach (Permission::all() as $permission){
+            User::where('email', 'test@test')->first()->role->permissions()->attach($permission);
+        }
+
+
+        \App\Models\User::factory(10)->create();
+        \App\Models\Customer::factory(50)->create();
     }
 }
