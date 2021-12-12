@@ -42,6 +42,14 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
     <x-admin.nav.changelog></x-admin.nav.changelog>
+
+
+    @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <x-admin.nav.admin></x-admin.nav.admin>
+    @endif
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

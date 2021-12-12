@@ -116,4 +116,11 @@ class User extends Authenticatable
 
         return $result;
     }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(){
+        return $this->hasRole(Role::ADMIN);
+    }
 }

@@ -41,6 +41,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/employees/update/{user}',[\App\Http\Controllers\UserController::class, 'update'])->name('employees.update');
     Route::delete('/employees/delete/{user}',[\App\Http\Controllers\UserController::class, 'destroy'])->name('employees.delete');
 
+    Route::get('/permissions', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permissions.all');
+
     Route::get('/changelog', [\App\Http\Controllers\HomeController::class, 'changelog'])->name('changelog');
     Route::get('/', function () {
         return view('admin.index');

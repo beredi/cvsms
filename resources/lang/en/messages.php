@@ -67,13 +67,18 @@ return [
             'delete' => 'Delete',
             'cancel' => 'Cancel',
             'date' => 'Date',
-            'message' => 'Message'
+            'message' => 'Message',
+            'admin' => 'Admin'
         ],
         'validator' => [
             'required' => 'The field :field is required.',
             'integer' => 'The value of :field must be an integer.',
             'numeric' => 'The value of :field must be a number.',
             'positive_number' => 'The value of :field must be a positive number.'
+        ],
+        'permissions' => [
+            'name' => 'Permissions',
+            'title' => 'Permissions for role'
         ]
     ]
 
