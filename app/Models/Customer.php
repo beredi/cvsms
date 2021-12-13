@@ -96,4 +96,11 @@ class Customer extends Model
     public static function getPermissions(){
         return self::$permissions;
     }
+
+    /**
+     *
+     */
+    public function vehicles(){
+        $this->hasMany(Vehicle::class);
+    }
 }
