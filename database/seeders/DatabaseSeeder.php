@@ -6,6 +6,9 @@ use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Vehicle;
+use App\Models\VehicleBrand;
+use App\Models\VehicleModel;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -61,5 +64,18 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory(10)->create();
         \App\Models\Customer::factory(50)->create();
+
+        $jsonPath = public_path('\json\car-list.json');
+        $carListJSON = file_get_contents($jsonPath);
+        $carList = json_decode($carListJSON, true);
+        foreach ($carList as $brand){
+            $vehicleBrand = VehicleBrand::create(['name' => $brand['brand']]);
+            foreach ($brand['models'] as $model){
+                $vehicleModel = new VehicleModel();
+                $vehicleModel->name = $model;
+                $vehicleModel->brand()->associate($vehicleBrand);
+                $vehicleModel->save();
+            }
+        }
     }
 }
