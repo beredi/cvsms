@@ -10,6 +10,18 @@ class Customer extends Model
     use HasFactory;
 
     /**
+     * PERMISSIONS
+     */
+
+    private static $permissions = array(
+        'VIEW_CUSTOMER' => 'View customer',
+        'VIEW_ALL_CUSTOMER' => 'View all customers',
+        'EDIT_CUSTOMER' => 'Edit customer',
+        'DELETE_CUSTOMER' => 'Delete customer',
+        'CREATE_CUSTOMER' => 'Create customer'
+    );
+
+    /**
      * @var string[]
      */
     protected $fillable = [
@@ -76,5 +88,12 @@ class Customer extends Model
      */
     public function getOweAttribute($value){
         return $value;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPermissions(){
+        return self::$permissions;
     }
 }

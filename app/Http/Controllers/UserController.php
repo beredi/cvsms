@@ -47,6 +47,14 @@ class UserController extends Controller
              'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
              'password' => ['required', 'string', 'min:8', 'confirmed'],
              'role' => ['required']
+         ],[
+             'name.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.name')]),
+             'lastname.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.lastname')]),
+             'email.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.email')]),
+             'email.unique' => __('messages.admin.validator.unique', ['field' => __('messages.admin.menu.customers.customer.email')]),
+             'password.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.employees.employee.password')]),
+             'password.min' => __('messages.admin.validator.min', ['field' => __('messages.admin.menu.employees.employee.password'), 'count' => '8']),
+             'role.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.employees.employee.user-role')]),
          ]);
         if ($validated){
            $user = User::create([

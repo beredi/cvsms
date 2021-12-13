@@ -18,7 +18,7 @@ class User extends Authenticatable
      * PERMISSIONS
      */
 
-    public static $permissions = array(
+    private static $permissions = array(
         'VIEW_USER' => 'View user',
         'VIEW_ALL_USER' => 'View all users',
         'EDIT_USER' => 'Edit user',
@@ -122,5 +122,12 @@ class User extends Authenticatable
      */
     public function isAdmin(){
         return $this->hasRole(Role::ADMIN);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPermissions(){
+        return self::$permissions;
     }
 }

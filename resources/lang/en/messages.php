@@ -18,7 +18,8 @@ return [
                 'all-records' => 'All vehicles'
             ],
             'customers' => [
-                'name' => 'Customers',
+                'name' => 'Customer',
+                'plural_name' => 'Customers',
                 'new-record' => 'Add customer',
                 'update-record' => 'Update customer',
                 'all-records' => 'All customers',
@@ -37,7 +38,8 @@ return [
                 'created_customer' => 'Customer :name :lastname was successful created'
             ],
             'employees' => [
-                'name' => 'Employees',
+                'name' => 'Employee',
+                'plural_name' => 'Employees',
                 'new-record' => 'Add employee',
                 'all-records' => 'All employees',
                 'update-record' => 'Update employee',
@@ -53,6 +55,8 @@ return [
                 'updated_employee' => 'Employee :name :lastname was successful updated'
             ],
             'user' => [
+                'name' => 'User',
+                'plural_name' => 'Users',
                 'profile' => 'Profile',
                 'settings' => 'Settings',
                 'activity-log' => 'Activity log',
@@ -68,17 +72,21 @@ return [
             'cancel' => 'Cancel',
             'date' => 'Date',
             'message' => 'Message',
-            'admin' => 'Admin'
+            'admin' => 'Admin',
+            'save' => 'Save'
         ],
         'validator' => [
             'required' => 'The field :field is required.',
             'integer' => 'The value of :field must be an integer.',
             'numeric' => 'The value of :field must be a number.',
-            'positive_number' => 'The value of :field must be a positive number.'
+            'positive_number' => 'The value of :field must be a positive number.',
+            'unique' => 'The value of :field is already taken. It must be unique.',
+            'min' => 'The value of :field must contains minimum :count characters.'
         ],
         'permissions' => [
             'name' => 'Permissions',
-            'title' => 'Permissions for role'
+            'title' => 'Permissions for role',
+            'updated-message' => 'Permissions have been updated.'
         ]
     ]
 

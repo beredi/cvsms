@@ -28,6 +28,10 @@ class Role extends Model
         return $this->hasMany(User::class);
     }
 
+    /**
+     * @param $permissionSlug
+     * @return bool
+     */
     public function hasPermission($permissionSlug){
         $result = false;
         foreach ($this->permissions as $permission){
@@ -39,4 +43,17 @@ class Role extends Model
 
         return $result;
     }
+
+    /**
+     * @return array
+     */
+    public function permissionsToArray(){
+        $permissionsArray = array();
+        foreach ($this->permissions as $permission){
+            $permissionsArray[$permission->slug] = $permission->name;
+        }
+
+        return$permissionsArray;
+    }
+
 }

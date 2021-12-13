@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -43,12 +44,14 @@ class DatabaseSeeder extends Seeder
             'role_id' => Role::where('slug', 'user')->first()->id
         ]);
 
-        $userPermissions = User::$permissions;
-        foreach ($userPermissions as $slug => $name){
-            Permission::create([
-                'name' => $name,
-                'slug' => $slug
-            ]);
+        $allPermissions = [User::getPermissions(), Customer::getPermissions()];
+        foreach ($allPermissions as $permissionsPerModel){
+            foreach ($permissionsPerModel as $slug => $name){
+                Permission::create([
+                    'name' => $name,
+                    'slug' => $slug
+                ]);
+            }
         }
 
         foreach (Permission::all() as $permission){

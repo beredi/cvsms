@@ -29,7 +29,9 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="float-left">{{__('messages.admin.menu.customers.all-records')}}</h2>
+            @can('create', \App\Models\Customer::class)
             <a href="{{route('customers.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus"></i> {{__('messages.admin.menu.customers.new-record')}}</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -59,8 +61,14 @@
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->id_card}}</td>
                         <td>{{$customer->owe}}</td>
-                        <td class="text-center"><a href="{{route('customers.edit', ['customer' => $customer->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a></td>
-                        <td class="text-center"><a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$customer->id}}"><i class="fas fa-trash-alt"></i></a>
+                        <td class="text-center">
+                        @can('update', $customer)
+                            <a href="{{route('customers.edit', ['customer' => $customer->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        @endcan
+                        </td>
+                        <td class="text-center">
+                        @can('delete', $customer)
+                            <a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$customer->id}}"><i class="fas fa-trash-alt"></i></a>
 
                             <!-- Delete Modal-->
                             <div class="modal fade" id="deleteModal{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -85,7 +93,7 @@
                                 @method('DELETE')
                                 @csrf
                             </form>
-
+                        @endcan
                         </td>
                     </tr>
                     @endforeach

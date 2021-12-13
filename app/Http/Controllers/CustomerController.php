@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use MongoDB\Driver\Session;
 
 class CustomerController extends Controller
@@ -15,6 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Customer::class);
         return view('admin.customer.index', ['customers' => Customer::all()]);
     }
 
@@ -25,6 +27,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Customer::class);
         return view('admin.customer.create');
     }
 
@@ -50,6 +53,7 @@ class CustomerController extends Controller
             'lastname.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.lastname')]),
             'phone.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.phone')]),
             'email.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.email')]),
+            'email.unique' => __('messages.admin.validator.unique', ['field' => __('messages.admin.menu.customers.customer.email')]),
             'address.required' => __('messages.admin.validator.required', ['field' => __('messages.admin.menu.customers.customer.address')]),
             'id_card.integer' => __('messages.admin.validator.integer', ['field' => __('messages.admin.menu.customers.customer.id_card')]),
             'id_card.gt' => __('messages.admin.validator.positive_number', ['field' => __('messages.admin.menu.customers.customer.id_card')]),
@@ -71,7 +75,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        $this->authorize('view', Customer::class);
     }
 
     /**
@@ -82,6 +86,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        $this->authorize('update', Customer::class);
         return view('admin.customer.edit', ['customer' => $customer]);
     }
 
@@ -130,6 +135,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $this->authorize('delete', Customer::class);
         $customer->delete();
         session()->flash('customer-deleted', __('messages.admin.menu.customers.deleted_customer', ['name' => $customer->name, 'lastname' => $customer->lastname]));
 

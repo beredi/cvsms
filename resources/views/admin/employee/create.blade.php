@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="role">{{ __('messages.admin.menu.employees.employee.user-role') }}</label>
+                    <label for="role" class="required">{{ __('messages.admin.menu.employees.employee.user-role') }}</label>
                     <div class="control-group">
                         <select name="role" required id="role" placeholder="{{__('messages.admin.general.search-for')}}">
                             <option value=""></option>

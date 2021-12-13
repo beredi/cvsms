@@ -18,31 +18,31 @@
                 @csrf
                 <div class="form-group">
                     <label class="required" for="name">{{__('messages.admin.menu.customers.customer.name')}}</label>
-                    <input type="text" name="name" class="form-control" required value="{{$customer->name}}">
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" required value="{{$customer->name}}">
                 </div>
                 <div class="form-group">
                     <label class="required" for="lastname">{{__('messages.admin.menu.customers.customer.lastname')}}</label>
-                    <input type="text" name="lastname" class="form-control" required value="{{$customer->lastname}}">
+                    <input type="text" name="lastname" class="form-control @error('lastname') is-invalid @enderror" required value="{{$customer->lastname}}">
                 </div>
                 <div class="form-group">
                     <label class="required" for="phone">{{__('messages.admin.menu.customers.customer.phone')}}</label>
-                    <input type="text" name="phone" class="form-control" value="{{$customer->phone}}">
+                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{$customer->phone}}">
                 </div>
                 <div class="form-group">
                     <label class="required" for="email">{{__('messages.admin.menu.customers.customer.email')}}</label>
-                    <input type="email" name="email" class="form-control" value="{{$customer->email}}">
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{$customer->email}}">
                 </div>
                 <div class="form-group">
                     <label class="required" for="address">{{__('messages.admin.menu.customers.customer.address')}}</label>
-                    <input type="text" name="address" class="form-control" value="{{$customer->address}}">
+                    <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{$customer->address}}">
                 </div>
                 <div class="form-group">
                     <label for="id_card">{{__('messages.admin.menu.customers.customer.id_card')}}</label>
-                    <input type="number" name="id_card" class="form-control" value="{{$customer->id_card}}">
+                    <input type="number" name="id_card" class="form-control @error('id_card') is-invalid @enderror" value="{{$customer->id_card}}">
                 </div>
                 <div class="form-group">
                     <label for="owe">{{__('messages.admin.menu.customers.customer.owe')}}</label>
-                    <input type="number" name="owe" class="form-control" step="0.01" value="{{$customer->owe}}">
+                    <input type="number" name="owe" class="form-control @error('owe') is-invalid @enderror" step="0.01" value="{{$customer->owe}}">
                 </div>
                 <div class="form-group">
                     <input type="submit" name="create_customer" id="create_customer" value="{{__('messages.admin.menu.customers.update-record')}}" class="btn btn-lg btn-success">

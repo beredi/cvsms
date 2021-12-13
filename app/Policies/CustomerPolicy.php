@@ -18,7 +18,7 @@ class CustomerPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->role->hasPermission('VIEW_ALL_CUSTOMER');
     }
 
     /**
@@ -30,7 +30,7 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer)
     {
-        //
+        return $user->role->hasPermission('VIEW_CUSTOMER');
     }
 
     /**
@@ -41,19 +41,18 @@ class CustomerPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role->hasPermission('CREATE_CUSTOMER');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Customer $customer)
+    public function update(User $user)
     {
-        //
+        return $user->role->hasPermission('EDIT_CUSTOMER');
     }
 
     /**
@@ -65,7 +64,7 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer)
     {
-        //
+        return $user->role->hasPermission('DELETE_CUSTOMER');
     }
 
     /**

@@ -42,6 +42,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/employees/delete/{user}',[\App\Http\Controllers\UserController::class, 'destroy'])->name('employees.delete');
 
     Route::get('/permissions', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permissions.all');
+    Route::post('/permissions/handle', [\App\Http\Controllers\PermissionController::class, 'ajaxHandler'])->name('permissions.ajax-handler');
+    Route::post('/permissions/attach', [\App\Http\Controllers\PermissionController::class, 'roleAttach'])->name('permissions.attach');
 
     Route::get('/changelog', [\App\Http\Controllers\HomeController::class, 'changelog'])->name('changelog');
     Route::get('/', function () {
