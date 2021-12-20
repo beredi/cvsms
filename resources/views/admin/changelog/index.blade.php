@@ -6,18 +6,21 @@
         <thead>
             <tr>
                 <th width="10%">{{__('messages.admin.general.date')}}</th>
+                <th width="10%">{{__('messages.admin.general.version')}}</th>
                 <th>{{__('messages.admin.general.message')}}</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th width="10%">{{__('messages.admin.general.date')}}</th>
+                <th>{{__('messages.admin.general.version')}}</th>
                 <th>{{__('messages.admin.general.message')}}</th>
             </tr>
         </tfoot>
         <tbody>
             <tr>
                 <td width="10%">20.12.2021</td>
+                <td width="10%">Beta 1.03</td>
                 <td>
                     <ul>
                         <li>Delete vehicle</li>
@@ -28,6 +31,7 @@
             </tr>
             <tr>
                 <td width="10%">13.12.2021</td>
+                <td width="10%">Beta 1.02</td>
                 <td>
                     <ul>
                         <li>Car list in database</li>
@@ -37,6 +41,7 @@
             </tr>
             <tr>
                 <td width="10%">6.12.2021</td>
+                <td width="10%">Beta 1.01</td>
                 <td>
                     <ul>
                         <li>Created changelog</li>

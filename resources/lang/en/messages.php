@@ -103,7 +103,8 @@ return [
             'save' => 'Save',
             'update' => 'Update',
             'delete_msg' => 'Are you sure that you want to delete?',
-            'add' => 'Add'
+            'add' => 'Add',
+            'version' => 'Version'
         ],
         'validator' => [
             'required' => 'The field :field is required.',
