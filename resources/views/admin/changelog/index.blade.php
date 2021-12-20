@@ -20,6 +20,7 @@
                 <td width="10%">20.12.2021</td>
                 <td>
                     <ul>
+                        <li>Add vehicle</li>
                         <li>Vehicle configurations</li>
                     </ul>
                 </td>
