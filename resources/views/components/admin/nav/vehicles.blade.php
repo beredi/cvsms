@@ -5,7 +5,7 @@
 </div>
 
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('vehicles.create')}}">
         <i class="fas fa-plus"></i>
         <span>{{ __('messages.admin.menu.vehicles.new-record')}}</span>
     </a>

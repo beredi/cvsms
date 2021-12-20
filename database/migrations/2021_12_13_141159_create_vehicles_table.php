@@ -16,15 +16,15 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('transmission');
-            $table->integer('chassis_num');
-            $table->double('engine_volume');
-            $table->double('engine_power');
-            $table->integer('year');
+            $table->bigInteger('chassis_num')->nullable();
+            $table->double('engine_volume')->nullable();
+            $table->double('engine_power')->nullable();
+            $table->integer('year')->nullable();
             $table->unsignedInteger('model_id');
             $table->foreign('model_id')->references('id')->on('vehicle_models')->onDelete('cascade');
             $table->unsignedInteger('type_id');
             $table->foreign('type_id')->references('id')->on('vehicle_types')->onDelete('cascade');
-            $table->unsignedInteger('customer_id');
+            $table->unsignedInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
         });

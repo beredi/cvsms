@@ -35,7 +35,19 @@ class VehicleType extends Model
         return $this->hasMany(Vehicle::class);
     }
 
-    public function getTypeAttribute(){
-        return $this->attributes['type'];
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getTypeAttribute($value){
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getIdAttribute($value){
+        return $value;
     }
 }

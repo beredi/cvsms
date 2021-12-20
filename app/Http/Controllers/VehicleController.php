@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Vehicle;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
@@ -29,7 +30,17 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Vehicle::class);
+        $years = array();
+        for ($i = 1885; $i<=date('Y'); $i++){
+            $years[] = $i;
+        }
+        return view('admin.vehicle.create',[
+            'types' => VehicleType::all()->sortBy('type'),
+            'brands' => VehicleBrand::all()->sortBy('name'),
+            'customers' => Customer::all()->sortBy('name'),
+            'years' => $years
+        ]);
     }
 
     /**
@@ -40,7 +51,19 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vehicle = new Vehicle();
+        $vehicle->type()->associate(VehicleType::findOrFail($request->get('type')));
+        $vehicle->model()->associate(VehicleModel::findOrFail($request->get('model')));
+        $FUCKME = $request->get('customers');
+        if ($request->get('customers') !== null) $vehicle->customer()->associate(Customer::findOrFail($request->get('customers')));
+        if ($request->get('engine_volume') !== null) $vehicle->setEngineVolumeAttribute($request->get('engine_volume'));
+        if ($request->get('engine_power') !== null) $vehicle->setEnginePowerAttribute($request->get('engine_power'));
+        if ($request->get('transmission') !== null) $vehicle->setTransmissionAttribute($request->get('transmission'));
+        if ($request->get('chassis_num') !== null) $vehicle->setChassisNumAttribute($request->get('chassis_num'));
+        if ($request->get('year') !== null) $vehicle->setYearAttribute($request->get('year'));
+        $vehicle->save();
+
+        return redirect(route('vehicles.all'));
     }
 
     /**
@@ -88,6 +111,10 @@ class VehicleController extends Controller
         //
     }
 
+    /**
+     * @param $topic
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function config($topic){
         $brands = null;
         if ($topic == Vehicle::VEHICLE_BRAND){
@@ -101,5 +128,18 @@ class VehicleController extends Controller
             $stuff = VehicleType::all();
         }
         return view('admin.vehicle.config', ['stuff' => $stuff, 'topic' => $topic, 'brands' => $brands]);
+    }
+
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajaxHandler(Request $request){
+        $brandId = $request->get('brandID');
+        $modelsArray = VehicleBrand::findOrFail($brandId)->modelsToArray();
+
+        return response()->json(array($modelsArray), 200);
     }
 }

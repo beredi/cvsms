@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <h2 class="float-left">{{__('messages.admin.menu.vehicles.all-records')}}</h2>
             @can('create', \App\Models\Vehicle::class)
-                <a href="{{route('customers.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus-circle"></i> {{__('messages.admin.menu.customers.new-record')}}</a>
+                <a href="{{route('vehicles.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus-circle"></i> {{__('messages.admin.menu.vehicles.new-record')}}</a>
             @endcan
         </div>
     </div>
@@ -34,7 +34,11 @@
                             <td>{{$vehicle->type->type}}</td>
                             <td>{{$vehicle->brand()->name}}</td>
                             <td>{{$vehicle->model->name}}</td>
-                            <td><a href="{{route('customers.show', ['customer' => $vehicle->customer->id])}}" class="text-dark">{{$vehicle->customer->fullname()}}</a></td>
+                            <td>
+                                @if($vehicle->customer != null)
+                                <a href="{{route('customers.show', ['customer' => $vehicle->customer->id])}}" class="text-dark">{{$vehicle->customer->fullname()}}</a>
+                                @endif
+                            </td>
                             <td>{{$vehicle->year}}</td>
                             <td>{{$vehicle->chassis_num}}</td>
                             <td>{{$vehicle->engine_volume}}</td>

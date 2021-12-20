@@ -29,7 +29,7 @@ return [
                     'brand' => 'Brand',
                     'models' => 'Models',
                     'model' => 'Model',
-                    'year' => 'Year of prod',
+                    'year' => 'Year of production',
                     'chassis_num' => 'Chassis number',
                     'engine_volume' => 'Engine volume',
                     'engine_power' => 'Engine power',

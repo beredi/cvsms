@@ -44,8 +44,6 @@ class Vehicle extends Model
         'transmission'
     ];
 
-    private $transmissionType = ['automatic', 'manual'];
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -96,5 +94,47 @@ class Vehicle extends Model
      */
     public function getEnginePowerAttribute($value){
         return $value;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getTransmissionTypes(){
+        return ['automatic', 'manual'];
+    }
+
+    /**
+     * @param $value
+     */
+    public function setEngineVolumeAttribute($value){
+        $this->attributes['engine_volume'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setEnginePowerAttribute($value){
+        $this->attributes['engine_power'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setYearAttribute($value){
+        $this->attributes['year'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setChassisNumAttribute($value){
+        $this->attributes['chassis_num'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setTransmissionAttribute($value){
+        $this->attributes['transmission'] = $value;
     }
 }
