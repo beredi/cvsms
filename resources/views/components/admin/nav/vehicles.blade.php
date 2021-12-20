@@ -17,3 +17,10 @@
         <span>{{ __('messages.admin.menu.vehicles.all-records')}}</span>
     </a>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{route('vehicles.config', ['topic' => \App\Models\Vehicle::VEHICLE_TYPE])}}">
+        <i class="fas fa-cogs"></i>
+        <span>{{ __('messages.admin.menu.vehicles.config')}}</span>
+    </a>
+</li>

@@ -30,7 +30,7 @@
         <div class="col-md-12">
             <h2 class="float-left">{{__('messages.admin.menu.customers.all-records')}}</h2>
             @can('create', \App\Models\Customer::class)
-            <a href="{{route('customers.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus"></i> {{__('messages.admin.menu.customers.new-record')}}</a>
+            <a href="{{route('customers.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus-circle"></i> {{__('messages.admin.menu.customers.new-record')}}</a>
             @endcan
         </div>
     </div>

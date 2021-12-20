@@ -9,6 +9,11 @@ class Vehicle extends Model
 {
     use HasFactory;
 
+    const VEHICLE_MODEL = 'model';
+    const VEHICLE_TYPE = 'type';
+    const VEHICLE_BRAND = 'brand';
+
+
     /**
      * PERMISSIONS
      */

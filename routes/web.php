@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(\route('admin'));
 });
 
 
@@ -44,6 +44,27 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/permissions', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permissions.all');
     Route::post('/permissions/handle', [\App\Http\Controllers\PermissionController::class, 'ajaxHandler'])->name('permissions.ajax-handler');
     Route::post('/permissions/attach', [\App\Http\Controllers\PermissionController::class, 'roleAttach'])->name('permissions.attach');
+
+    Route::get('/vehicles/config/{topic}', [\App\Http\Controllers\VehicleController::class, 'config'])->name('vehicles.config');
+    Route::post('/vehicles/config/handle', [\App\Http\Controllers\VehicleBrandController::class, 'ajaxHandler'])->name('vehicles.ajax');
+
+    Route::get('/vehicles/config/type/create', [\App\Http\Controllers\VehicleTypeController::class, 'create'])->name('vehicletype.create');
+    Route::post('/vehicles/config/type/store', [\App\Http\Controllers\VehicleTypeController::class, 'store'])->name('vehicletype.store');
+    Route::get('/vehicles/config/type/edit/{type}', [\App\Http\Controllers\VehicleTypeController::class, 'edit'])->name('vehicletype.edit');
+    Route::patch('/vehicles/config/type/update/{type}', [\App\Http\Controllers\VehicleTypeController::class, 'update'])->name('vehicletype.update');
+    Route::delete('/vehicles/config/type/delete',[\App\Http\Controllers\VehicleTypeController::class, 'destroy'])->name('vehicletype.delete');
+
+    Route::get('/vehicles/config/brand/create', [\App\Http\Controllers\VehicleBrandController::class, 'create'])->name('vehiclebrand.create');
+    Route::post('/vehicles/config/brand/store', [\App\Http\Controllers\VehicleBrandController::class, 'store'])->name('vehiclebrand.store');
+    Route::get('/vehicles/config/brand/edit/{type}', [\App\Http\Controllers\VehicleBrandController::class, 'edit'])->name('vehiclebrand.edit');
+    Route::patch('/vehicles/config/brand/update/{type}', [\App\Http\Controllers\VehicleBrandController::class, 'update'])->name('vehiclebrand.update');
+    Route::delete('/vehicles/config/brand/delete',[\App\Http\Controllers\VehicleBrandController::class, 'destroy'])->name('vehiclebrand.delete');
+
+    Route::get('/vehicles/config/model/create', [\App\Http\Controllers\VehicleModelController::class, 'create'])->name('vehiclemodel.create');
+    Route::post('/vehicles/config/model/store', [\App\Http\Controllers\VehicleModelController::class, 'store'])->name('vehiclemodel.store');
+    Route::get('/vehicles/config/model/edit/{type}', [\App\Http\Controllers\VehicleModelController::class, 'edit'])->name('vehiclemodel.edit');
+    Route::patch('/vehicles/config/model/update/{type}', [\App\Http\Controllers\VehicleModelController::class, 'update'])->name('vehiclemodel.update');
+    Route::delete('/vehicles/config/model/delete',[\App\Http\Controllers\VehicleModelController::class, 'destroy'])->name('vehiclemodel.delete');
 
     Route::get('/changelog', [\App\Http\Controllers\HomeController::class, 'changelog'])->name('changelog');
     Route::get('/', function () {

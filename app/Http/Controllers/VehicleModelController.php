@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class VehicleModelController extends Controller
@@ -24,7 +26,7 @@ class VehicleModelController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.vehicle.configCreate', ['topic' => 'model', 'brands' => VehicleBrand::all()->sortBy('name')]);
     }
 
     /**
@@ -35,7 +37,13 @@ class VehicleModelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new VehicleModel();
+        $model->setNameAttribute($request->get('name'));
+        $model->brand()->associate(VehicleBrand::findOrFail($request->get('model')));
+        $model->save();
+
+        session()->flash('vehicle-type-created', __('messages.admin.menu.vehicles.messages.type_created', ['type' => 'Model']));
+        return redirect(route('vehicles.config', ['topic' => 'model']));
     }
 
     /**
@@ -55,9 +63,9 @@ class VehicleModelController extends Controller
      * @param  \App\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(VehicleModel $vehicleModel)
+    public function edit($model)
     {
-        //
+        return view('admin.vehicle.editTopic', ['topic' => 'model', 'brand' => VehicleModel::findOrFail($model)]);
     }
 
     /**
@@ -67,9 +75,13 @@ class VehicleModelController extends Controller
      * @param  \App\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VehicleModel $vehicleModel)
+    public function update(Request $request, $type)
     {
-        //
+        $brand = VehicleModel::findOrFail($type);
+        $brand->update($request->all());
+        session()->flash('vehicle-type-updated', __('messages.admin.menu.vehicles.messages.type_updated', ['type' => 'Model']));
+
+        return redirect(route('vehicles.config', ['topic' => 'model']));
     }
 
     /**
@@ -78,8 +90,11 @@ class VehicleModelController extends Controller
      * @param  \App\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VehicleModel $vehicleModel)
+    public function destroy(Request $request)
     {
-        //
+        $brand = VehicleModel::findOrFail($request['thing_id']);
+        $brand->delete();
+        session()->flash('vehicle-type-deleted', __('messages.admin.menu.vehicles.messages.type_deleted', ['type' => 'Model']));
+        return redirect()->back();
     }
 }

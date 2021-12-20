@@ -27,4 +27,37 @@ class VehicleBrand extends Model
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function getIdAttribute($value){
+        return $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNameAttribute($value){
+        return $value;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function models(){
+        return $this->hasMany(VehicleModel::class, 'brand_id');
+    }
+
+    /**
+     * @return array
+     */
+    public function modelsToArray(){
+        $modelsArray = array();
+        foreach ($this->models as $model){
+            $modelsArray[$model->id] = $model->name;
+        }
+
+        return $modelsArray;
+    }
 }

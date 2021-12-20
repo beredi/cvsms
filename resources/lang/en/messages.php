@@ -15,7 +15,25 @@ return [
             'vehicles' => [
                 'name' => 'Vehicles',
                 'new-record' => 'Add vehicle',
-                'all-records' => 'All vehicles'
+                'all-records' => 'All vehicles',
+                'create_topic' => 'Create vehicle :topic',
+                'update_topic' => 'Update vehicle :topic',
+                'config' => 'Configurations',
+                'vehicles_config' => 'Vehicles configuration',
+                'vehicle' => [
+                    'name' => 'Name',
+                    'types' => 'Types',
+                    'type' => 'Type',
+                    'brands' => 'Brands',
+                    'brand' => 'Brand',
+                    'models' => 'Models',
+                    'model' => 'Model'
+                ],
+                'messages' => [
+                    'type_deleted' => ':type has been successfully deleted',
+                    'type_created' => ':type has been successfully created',
+                    'type_updated' => ':type has been successfully updated'
+                ]
             ],
             'customers' => [
                 'name' => 'Customer',
@@ -73,7 +91,10 @@ return [
             'date' => 'Date',
             'message' => 'Message',
             'admin' => 'Admin',
-            'save' => 'Save'
+            'save' => 'Save',
+            'update' => 'Update',
+            'delete_msg' => 'Are you sure that you want to delete?',
+            'add' => 'Add'
         ],
         'validator' => [
             'required' => 'The field :field is required.',

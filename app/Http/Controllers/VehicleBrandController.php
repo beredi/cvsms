@@ -24,7 +24,7 @@ class VehicleBrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.vehicle.configCreate', ['topic' => 'brand']);
     }
 
     /**
@@ -35,7 +35,9 @@ class VehicleBrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        VehicleBrand::create($request->all());
+        session()->flash('vehicle-type-created', __('messages.admin.menu.vehicles.messages.type_created', ['type' => 'Brand']));
+        return redirect(route('vehicles.config', ['topic' => 'brand']));
     }
 
     /**
@@ -55,9 +57,9 @@ class VehicleBrandController extends Controller
      * @param  \App\Models\VehicleBrand  $vehicleBrand
      * @return \Illuminate\Http\Response
      */
-    public function edit(VehicleBrand $vehicleBrand)
+    public function edit($brand)
     {
-        //
+        return view('admin.vehicle.editTopic', ['topic' => 'brand', 'brand' => VehicleBrand::findOrFail($brand)]);
     }
 
     /**
@@ -67,9 +69,13 @@ class VehicleBrandController extends Controller
      * @param  \App\Models\VehicleBrand  $vehicleBrand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VehicleBrand $vehicleBrand)
+    public function update(Request $request, $type)
     {
-        //
+        $brand = VehicleBrand::findOrFail($type);
+        $brand->update($request->all());
+        session()->flash('vehicle-type-updated', __('messages.admin.menu.vehicles.messages.type_updated', ['type' => 'Brand']));
+
+        return redirect(route('vehicles.config', ['topic' => 'brand']));
     }
 
     /**
@@ -78,8 +84,22 @@ class VehicleBrandController extends Controller
      * @param  \App\Models\VehicleBrand  $vehicleBrand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VehicleBrand $vehicleBrand)
+    public function destroy(Request $request)
     {
-        //
+        $brand = VehicleBrand::findOrFail($request['thing_id']);
+        $brand->delete();
+        session()->flash('vehicle-type-deleted', __('messages.admin.menu.vehicles.messages.type_deleted', ['type' => 'Brand']));
+        return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajaxHandler(Request $request){
+        $brandId = $request->get('brandID');
+        $modelsArray = VehicleBrand::findOrFail($brandId)->modelsToArray();
+
+        return response()->json(array($modelsArray), 200);
     }
 }

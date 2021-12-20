@@ -17,6 +17,15 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">13.12.2021</td>
+                <td>
+                    <ul>
+                        <li>Car list in database</li>
+                        <li>Permissions page</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">6.12.2021</td>
                 <td>
                     <ul>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use App\Models\VehicleBrand;
+use App\Models\VehicleModel;
+use App\Models\VehicleType;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -81,5 +84,20 @@ class VehicleController extends Controller
     public function destroy(Vehicle $vehicle)
     {
         //
+    }
+
+    public function config($topic){
+        $brands = null;
+        if ($topic == Vehicle::VEHICLE_BRAND){
+            $stuff = VehicleBrand::all();
+        }
+        elseif ($topic == Vehicle::VEHICLE_MODEL){
+            $brands = VehicleBrand::all()->sortBy("name");
+            $stuff = null;
+        }
+        else{
+            $stuff = VehicleType::all();
+        }
+        return view('admin.vehicle.config', ['stuff' => $stuff, 'topic' => $topic, 'brands' => $brands]);
     }
 }
