@@ -54,7 +54,9 @@
     <!-- Page level custom scripts -->
     <script>
         $(document).ready(function() {
-            $('#changelog').DataTable();
+            $('#changelog').DataTable({
+                ordering: false
+            });
         });
     </script>
 @endsection

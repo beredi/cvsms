@@ -38,7 +38,10 @@ return [
                 'messages' => [
                     'type_deleted' => ':type has been successfully deleted',
                     'type_created' => ':type has been successfully created',
-                    'type_updated' => ':type has been successfully updated'
+                    'type_updated' => ':type has been successfully updated',
+                    'vehicle_created' => 'Vehicle has been successfully created.',
+                    'vehicle_deleted' => 'Vehicle has been successfully deleted.',
+                    'vehicle_updated' => 'Vehicle has been successfully updated.'
                 ]
             ],
             'customers' => [

@@ -35,6 +35,7 @@ class VehicleController extends Controller
         for ($i = 1885; $i<=date('Y'); $i++){
             $years[] = $i;
         }
+        $years = array_reverse($years);
         return view('admin.vehicle.create',[
             'types' => VehicleType::all()->sortBy('type'),
             'brands' => VehicleBrand::all()->sortBy('name'),
@@ -61,6 +62,8 @@ class VehicleController extends Controller
         if ($request->get('chassis_num') !== null) $vehicle->setChassisNumAttribute($request->get('chassis_num'));
         if ($request->get('year') !== null) $vehicle->setYearAttribute($request->get('year'));
         $vehicle->save();
+
+        session()->flash('vehicle-created', __('messages.admin.menu.vehicles.messages.vehicle_created'));
 
         return redirect(route('vehicles.all'));
     }
@@ -102,12 +105,15 @@ class VehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy(Request $request)
     {
-        //
+        $vehicle = Vehicle::findOrFail($request->get('thing_id'));
+        $vehicle->delete();
+
+        session()->flash('vehicle-deleted', __('messages.admin.menu.vehicles.messages.vehicle_deleted'));
+        return redirect()->back();
     }
 
     /**
