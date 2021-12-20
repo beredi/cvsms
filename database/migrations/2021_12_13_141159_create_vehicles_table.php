@@ -17,8 +17,9 @@ class CreateVehiclesTable extends Migration
             $table->increments('id');
             $table->string('transmission');
             $table->integer('chassis_num');
-            $table->integer('engine_volume');
-            $table->integer('engine_power');
+            $table->double('engine_volume');
+            $table->double('engine_power');
+            $table->integer('year');
             $table->unsignedInteger('model_id');
             $table->foreign('model_id')->references('id')->on('vehicle_models')->onDelete('cascade');
             $table->unsignedInteger('type_id');

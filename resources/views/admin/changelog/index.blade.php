@@ -17,6 +17,14 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">20.12.2021</td>
+                <td>
+                    <ul>
+                        <li>Vehicle configurations</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">13.12.2021</td>
                 <td>
                     <ul>

@@ -40,7 +40,6 @@
                 <thead>
                     <tr>
                         <th>{{__('messages.admin.menu.customers.customer.name')}}</th>
-                        <th>{{__('messages.admin.menu.customers.customer.lastname')}}</th>
                         <th>{{__('messages.admin.menu.customers.customer.phone')}}</th>
                         <th>{{__('messages.admin.menu.customers.customer.address')}}</th>
                         <th>{{__('messages.admin.menu.customers.customer.email')}}</th>
@@ -54,8 +53,7 @@
                 @if($customers->isNotEmpty())
                     @foreach($customers as $customer)
                     <tr>
-                        <td>{{$customer->name}}</td>
-                        <td>{{$customer->lastname}}</td>
+                        <td>{{$customer->fullName()}}</td>
                         <td>{{$customer->phone}}</td>
                         <td>{{$customer->address}}</td>
                         <td>{{$customer->email}}</td>

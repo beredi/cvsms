@@ -103,4 +103,11 @@ class Customer extends Model
     public function vehicles(){
         $this->hasMany(Vehicle::class);
     }
+
+    /**
+     * @return string
+     */
+    public function fullName(){
+        return $this->name . ' ' . $this->lastname;
+    }
 }

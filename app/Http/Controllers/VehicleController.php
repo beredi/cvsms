@@ -17,7 +17,9 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny', Vehicle::class);
+
+        return view('admin.vehicle.index', ['vehicles' => Vehicle::all()]);
     }
 
     /**

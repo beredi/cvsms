@@ -13,7 +13,8 @@ return [
                 'all-records' => 'All service records'
             ],
             'vehicles' => [
-                'name' => 'Vehicles',
+                'name' => 'Vehicle',
+                'plural_name' => 'Vehicles',
                 'new-record' => 'Add vehicle',
                 'all-records' => 'All vehicles',
                 'create_topic' => 'Create vehicle :topic',
@@ -27,7 +28,12 @@ return [
                     'brands' => 'Brands',
                     'brand' => 'Brand',
                     'models' => 'Models',
-                    'model' => 'Model'
+                    'model' => 'Model',
+                    'year' => 'Year of prod',
+                    'chassis_num' => 'Chassis number',
+                    'engine_volume' => 'Engine volume',
+                    'engine_power' => 'Engine power',
+                    'transmission' => 'Transmission'
                 ],
                 'messages' => [
                     'type_deleted' => ':type has been successfully deleted',

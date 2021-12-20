@@ -27,6 +27,13 @@ class Vehicle extends Model
     );
 
     /**
+     * @return array
+     */
+    public static function getPermissions(){
+        return self::$permissions;
+    }
+
+    /**
      * @var string[]
      */
     protected $fillable = [
@@ -58,5 +65,36 @@ class Vehicle extends Model
      */
     public function customer(){
         return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function brand(){
+        return $this->model->brand;
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getChassisNumAttribute($value){
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getEngineVolumeAttribute($value){
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getEnginePowerAttribute($value){
+        return $value;
     }
 }

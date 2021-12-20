@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -20,7 +21,8 @@ class PermissionController extends Controller
         $this->authorize('viewAny', Permission::class);
         $permissions = array(
             'user' => User::getPermissions(),
-            'customers' => Customer::getPermissions()
+            'customers' => Customer::getPermissions(),
+            'vehicles' => Vehicle::getPermissions()
         );
         return view('admin.admin.permissions', [
             'roles' => Role::all(),

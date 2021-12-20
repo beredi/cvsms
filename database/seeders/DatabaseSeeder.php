@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Vehicle;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
 use Illuminate\Database\Seeder;
@@ -46,7 +47,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => Role::where('slug', 'user')->first()->id
         ]);
 
-        $allPermissions = [User::getPermissions(), Customer::getPermissions()];
+        $allPermissions = [User::getPermissions(), Customer::getPermissions(), Vehicle::getPermissions()];
         foreach ($allPermissions as $permissionsPerModel){
             foreach ($permissionsPerModel as $slug => $name){
                 Permission::create([

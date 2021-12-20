@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Policy;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class VehiclePolicy
@@ -18,17 +18,17 @@ class VehiclePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->role->hasPermission('VIEW_ALL_VEHICLE');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Policy  $policy
+     * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Policy $policy)
+    public function view(User $user, Vehicle $vehicle)
     {
         //
     }
@@ -48,10 +48,10 @@ class VehiclePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Policy  $policy
+     * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Policy $policy)
+    public function update(User $user, Vehicle $vehicle)
     {
         //
     }
@@ -60,10 +60,10 @@ class VehiclePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Policy  $policy
+     * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Policy $policy)
+    public function delete(User $user, Vehicle $vehicle)
     {
         //
     }
@@ -72,10 +72,10 @@ class VehiclePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Policy  $policy
+     * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Policy $policy)
+    public function restore(User $user, Vehicle $vehicle)
     {
         //
     }
@@ -84,10 +84,10 @@ class VehiclePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Policy  $policy
+     * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Policy $policy)
+    public function forceDelete(User $user, Vehicle $vehicle)
     {
         //
     }
