@@ -76,6 +76,8 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $this->authorize('view', Customer::class);
+
+        return view('admin.customer.show', ['customer' => $customer]);
     }
 
     /**

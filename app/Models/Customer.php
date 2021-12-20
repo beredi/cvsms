@@ -98,10 +98,10 @@ class Customer extends Model
     }
 
     /**
-     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function vehicles(){
-        $this->hasMany(Vehicle::class);
+       return $this->hasMany(Vehicle::class);
     }
 
     /**

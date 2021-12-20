@@ -30,7 +30,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        //
+        return $user->role->hasPermission('VIEW_VEHICLE');
     }
 
     /**
@@ -41,7 +41,7 @@ class VehiclePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role->hasPermission('CREATE_VEHICLE');
     }
 
     /**
@@ -51,9 +51,9 @@ class VehiclePolicy
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Vehicle $vehicle)
+    public function update(User $user)
     {
-        //
+        return $user->role->hasPermission('EDIT_VEHICLE');
     }
 
     /**
@@ -63,9 +63,9 @@ class VehiclePolicy
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Vehicle $vehicle)
+    public function delete(User $user)
     {
-        //
+        return $user->role->hasPermission('DELETE_VEHICLE');
     }
 
     /**

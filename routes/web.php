@@ -32,6 +32,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/customers/edit/{customer}',[\App\Http\Controllers\CustomerController::class, 'edit'])->name('customers.edit');
     Route::patch('/customers/update/{customer}',[\App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers/delete/{customer}',[\App\Http\Controllers\CustomerController::class, 'destroy'])->name('customers.delete');
+    Route::get('/customers/show/{customer}',[\App\Http\Controllers\CustomerController::class, 'show'])->name('customers.show');
 
     Route::get('/employees', [\App\Http\Controllers\UserController::class, 'index'])->name('employees.all');
     Route::get('/employees/add',[\App\Http\Controllers\UserController::class, 'create'])->name('employees.create');

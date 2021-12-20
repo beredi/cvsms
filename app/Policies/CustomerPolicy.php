@@ -25,10 +25,9 @@ class CustomerPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Customer $customer)
+    public function view(User $user)
     {
         return $user->role->hasPermission('VIEW_CUSTOMER');
     }

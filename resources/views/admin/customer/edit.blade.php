@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-5 col-md-12">
-            <h2>{{__('messages.admin.menu.customers.new-record')}}</h2>
+            <h2>{{__('messages.admin.menu.customers.update-record')}}</h2>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

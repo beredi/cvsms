@@ -53,7 +53,7 @@
                 @if($customers->isNotEmpty())
                     @foreach($customers as $customer)
                     <tr>
-                        <td>{{$customer->fullName()}}</td>
+                        <td><a href="{{route('customers.show', ['customer' => $customer->id])}}" class="text-dark">{{$customer->fullName()}}</a></td>
                         <td>{{$customer->phone}}</td>
                         <td>{{$customer->address}}</td>
                         <td>{{$customer->email}}</td>

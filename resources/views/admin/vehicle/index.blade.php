@@ -34,7 +34,7 @@
                             <td>{{$vehicle->type->type}}</td>
                             <td>{{$vehicle->brand()->name}}</td>
                             <td>{{$vehicle->model->name}}</td>
-                            <td>{{$vehicle->customer->fullname()}}</td>
+                            <td><a href="{{route('customers.show', ['customer' => $vehicle->customer->id])}}" class="text-dark">{{$vehicle->customer->fullname()}}</a></td>
                             <td>{{$vehicle->year}}</td>
                             <td>{{$vehicle->chassis_num}}</td>
                             <td>{{$vehicle->engine_volume}}</td>
@@ -46,7 +46,7 @@
                                 @endcan
                             </td>
                             <td class="text-center">
-                                @can('delete', $vehicle)
+                                @can('delete', \App\Models\Vehicle::class)
                                     <a href="#" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal{{$vehicle->id}}"><i class="fas fa-trash-alt"></i></a>
 
 
