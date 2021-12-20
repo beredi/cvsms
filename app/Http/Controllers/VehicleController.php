@@ -54,7 +54,6 @@ class VehicleController extends Controller
         $vehicle = new Vehicle();
         $vehicle->type()->associate(VehicleType::findOrFail($request->get('type')));
         $vehicle->model()->associate(VehicleModel::findOrFail($request->get('model')));
-        $FUCKME = $request->get('customers');
         if ($request->get('customers') !== null) $vehicle->customer()->associate(Customer::findOrFail($request->get('customers')));
         if ($request->get('engine_volume') !== null) $vehicle->setEngineVolumeAttribute($request->get('engine_volume'));
         if ($request->get('engine_power') !== null) $vehicle->setEnginePowerAttribute($request->get('engine_power'));
