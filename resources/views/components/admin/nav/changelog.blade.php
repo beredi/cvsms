@@ -1,7 +1,7 @@
 
 <!-- Heading -->
 <div class="sidebar-heading">
-    <i class="fas fa-info-circle"></i> CVSMS Beta 1.03
+    <i class="fas fa-info-circle"></i> CVSMS Beta 1.04
 </div>
 
 <li class="nav-item">

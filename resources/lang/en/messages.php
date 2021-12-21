@@ -16,6 +16,7 @@ return [
                 'name' => 'Vehicle',
                 'plural_name' => 'Vehicles',
                 'new-record' => 'Add vehicle',
+                'update-record' => 'Update vehicle',
                 'all-records' => 'All vehicles',
                 'create_topic' => 'Create vehicle :topic',
                 'update_topic' => 'Update vehicle :topic',

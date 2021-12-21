@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -22,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-success">
-                    {{ \Illuminate\Support\Facades\Session::get('customer-updated') }}
+                    {{ \Illuminate\Support\Facades\Session::get('vehicle-updated') }}
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
                             <td>{{$vehicle->transmission}}</td>
                             <td class="text-center">
                                 @can('update', $vehicle)
-                                    <a href="{{route('customers.edit', ['customer' => $vehicle->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="{{route('vehicles.edit', ['vehicle' => $vehicle->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                                 @endcan
                             </td>
                             <td class="text-center">

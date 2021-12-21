@@ -19,6 +19,15 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">21.12.2021</td>
+                <td width="10%">Beta 1.04</td>
+                <td>
+                    <ul>
+                        <li>Update vehicle</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">20.12.2021</td>
                 <td width="10%">Beta 1.03</td>
                 <td>

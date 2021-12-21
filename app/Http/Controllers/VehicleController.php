@@ -31,16 +31,12 @@ class VehicleController extends Controller
     public function create()
     {
         $this->authorize('create', Vehicle::class);
-        $years = array();
-        for ($i = 1885; $i<=date('Y'); $i++){
-            $years[] = $i;
-        }
-        $years = array_reverse($years);
+
         return view('admin.vehicle.create',[
             'types' => VehicleType::all()->sortBy('type'),
             'brands' => VehicleBrand::all()->sortBy('name'),
             'customers' => Customer::all()->sortBy('name'),
-            'years' => $years
+            'years' => self::getYears()
         ]);
     }
 
@@ -52,6 +48,8 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Vehicle::class);
+
         $vehicle = new Vehicle();
         $vehicle->type()->associate(VehicleType::findOrFail($request->get('type')));
         $vehicle->model()->associate(VehicleModel::findOrFail($request->get('model')));
@@ -87,7 +85,16 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        $this->authorize('update', Vehicle::class);
+
+        return view('admin.vehicle.edit', [
+            'vehicle' => $vehicle,
+            'types' => VehicleType::all()->sortBy('type'),
+            'brands' => VehicleBrand::all()->sortBy('name'),
+            'models' => VehicleBrand::findOrFail($vehicle->brand()->id)->models,
+            'customers' => Customer::all()->sortBy('name'),
+            'years' => self::getYears()
+        ]);
     }
 
     /**
@@ -99,7 +106,22 @@ class VehicleController extends Controller
      */
     public function update(Request $request, Vehicle $vehicle)
     {
-        //
+        $this->authorize('update', Vehicle::class);
+
+        $vehicle->type()->associate(VehicleType::findOrFail($request->get('type')));
+        $vehicle->model()->associate(VehicleModel::findOrFail($request->get('model')));
+        $vehicle->customer()->associate(Customer::findOrFail($request->get('customers')));
+
+        $vehicle->setYearAttribute($request->get('year'));
+        $vehicle->setChassisNumAttribute($request->get('chassis_num'));
+        $vehicle->setTransmissionAttribute($request->get('transmission'));
+        $vehicle->setEnginePowerAttribute($request->get('engine_power'));
+        $vehicle->setEngineVolumeAttribute($request->get('engine_volume'));
+
+        $vehicle->save();
+        session()->flash('vehicle-updated', __('messages.admin.menu.vehicles.messages.vehicle_updated'));
+
+        return redirect(route('vehicles.all'));
     }
 
     /**
@@ -109,6 +131,7 @@ class VehicleController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->authorize('delete', Vehicle::class);
         $vehicle = Vehicle::findOrFail($request->get('thing_id'));
         $vehicle->delete();
 
@@ -146,5 +169,16 @@ class VehicleController extends Controller
         $modelsArray = VehicleBrand::findOrFail($brandId)->modelsToArray();
 
         return response()->json(array($modelsArray), 200);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getYears(){
+        $years = array();
+        for ($i = 1885; $i<=date('Y'); $i++){
+            $years[] = $i;
+        }
+        return array_reverse($years);
     }
 }

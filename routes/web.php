@@ -52,7 +52,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/vehicles', [\App\Http\Controllers\VehicleController::class, 'index'])->name('vehicles.all');
     Route::get('/vehicles/create', [\App\Http\Controllers\VehicleController::class, 'create'])->name('vehicles.create');
     Route::post('/vehicles/store', [\App\Http\Controllers\VehicleController::class, 'store'])->name('vehicles.store');
-    Route::post('/vehicles/models/handlehandle', [\App\Http\Controllers\VehicleController::class, 'ajaxHandler'])->name('vehicles.ajax-handler');
+    Route::get('/vehicles/edit/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicles.edit');
+    Route::patch('/vehicles/update/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'update'])->name('vehicles.update');
+    Route::post('/vehicles/models/handle', [\App\Http\Controllers\VehicleController::class, 'ajaxHandler'])->name('vehicles.ajax-handler');
     Route::delete('/vehicles/delete', [\App\Http\Controllers\VehicleController::class, 'destroy'])->name('vehicles.delete');
 
     Route::get('/vehicles/config/type/create', [\App\Http\Controllers\VehicleTypeController::class, 'create'])->name('vehicletype.create');
