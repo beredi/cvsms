@@ -137,4 +137,11 @@ class Vehicle extends Model
     public function setTransmissionAttribute($value){
         $this->attributes['transmission'] = $value;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
 }

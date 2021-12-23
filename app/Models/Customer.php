@@ -110,4 +110,11 @@ class Customer extends Model
     public function fullName(){
         return $this->name . ' ' . $this->lastname;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
 }

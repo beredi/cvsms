@@ -75,6 +75,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/vehicles/config/model/update/{type}', [\App\Http\Controllers\VehicleModelController::class, 'update'])->name('vehiclemodel.update');
     Route::delete('/vehicles/config/model/delete',[\App\Http\Controllers\VehicleModelController::class, 'destroy'])->name('vehiclemodel.delete');
 
+    Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services.all');
+
     Route::get('/changelog', [\App\Http\Controllers\HomeController::class, 'changelog'])->name('changelog');
     Route::get('/', function () {
         return view('admin.index');

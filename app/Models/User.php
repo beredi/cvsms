@@ -130,4 +130,18 @@ class User extends Authenticatable
     public static function getPermissions(){
         return self::$permissions;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function fullName(){
+        return $this->name . ' ' . $this->lastname;
+    }
 }

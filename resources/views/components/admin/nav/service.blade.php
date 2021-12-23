@@ -12,7 +12,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('services.all')}}">
         <i class="fas fa-list"></i>
         <span>{{ __('messages.admin.menu.service.all-records')}}</span>
     </a>

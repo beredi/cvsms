@@ -45,6 +45,21 @@ return [
                     'vehicle_updated' => 'Vehicle has been successfully updated.'
                 ]
             ],
+            'services' => [
+                'name' => 'Service',
+                'plural_name' => 'Services',
+                'new-record' => 'Add service',
+                'update-record' => 'Update service',
+                'all-records' => 'All services',
+                'service' => [
+                    'km' => 'Kilometers',
+                    'name' => 'Name',
+                    'description' => 'Description',
+                    'time_spent' => 'Time spent',
+                    'price' => 'Price',
+                    'date' => 'Date'
+                ]
+            ],
             'customers' => [
                 'name' => 'Customer',
                 'plural_name' => 'Customers',
