@@ -19,6 +19,17 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">23.12.2021</td>
+                <td width="10%">Beta 1.10</td>
+                <td>
+                    <ul>
+                        <li>Breadcrumbs to show pages</li>
+                        <li>Shows for vehicle, service, customer</li>
+                        <li>Services - complete</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">21.12.2021</td>
                 <td width="10%">Beta 1.04</td>
                 <td>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Service;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -26,7 +29,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Service::class);
+
+        return view('admin.service.create', ['customers' => Customer::all()->sortBy('name')]);
     }
 
     /**
@@ -37,7 +42,22 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vehicle = Vehicle::findOrFail($request->get('vehicle'));
+        $service = new Service();
+        $service->vehicle()->associate($vehicle);
+        $service->name = $request->get('name');
+        $service->description = $request->get('description');
+        $service->kilometers = $request->get('kilometers');
+        $service->time_spent = $request->get('time_spent');
+        $service->price = $request->get('price');
+        $service->price = $request->get('price');
+        $service->date = $request->get('date');
+        $service->employee()->associate(Auth::user());
+
+        $service->save();
+        session()->flash('service-created', __('messages.admin.menu.services.messages.service_created'));
+
+        return redirect(route('services.all'));
     }
 
     /**
@@ -48,7 +68,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        $this->authorize('view', $service);
+
+        return view('admin.service.show', ['service' => $service]);
     }
 
     /**
@@ -59,7 +81,12 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        $this->authorize('update', $service);
+
+        return view('admin.service.edit', [
+            'service' => $service,
+            'customers' => Customer::all()->sortBy('name')
+        ]);
     }
 
     /**
@@ -71,7 +98,24 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $this->authorize('update', $service);
+
+        $vehicle = Vehicle::findOrFail($request->get('vehicle'));
+
+        $service->vehicle()->associate($vehicle);
+        $service->name = $request->get('name');
+        $service->description = $request->get('description');
+        $service->kilometers = $request->get('kilometers');
+        $service->time_spent = $request->get('time_spent');
+        $service->price = $request->get('price');
+        $service->price = $request->get('price');
+        $service->date = $request->get('date');
+        $service->employee()->associate(Auth::user());
+
+        $service->save();
+        session()->flash('service-updated', __('messages.admin.menu.services.messages.service_updated'));
+
+        return redirect(route('services.all'));
     }
 
     /**
@@ -80,8 +124,14 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Request $request)
     {
-        //
+        $service = Service::findOrFail($request->get('thing_id'));
+        $this->authorize('delete', $service);
+
+        $service->delete();
+        session()->flash('service-deleted', __('messages.admin.menu.services.messages.service_deleted'));
+
+        return redirect()->back();
     }
 }

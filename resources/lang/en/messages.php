@@ -32,6 +32,7 @@ return [
                     'model' => 'Model',
                     'year' => 'Year of production',
                     'chassis_num' => 'Chassis number',
+                    'engine' => 'Enginge',
                     'engine_volume' => 'Engine volume',
                     'engine_power' => 'Engine power',
                     'transmission' => 'Transmission'
@@ -52,12 +53,17 @@ return [
                 'update-record' => 'Update service',
                 'all-records' => 'All services',
                 'service' => [
-                    'km' => 'Kilometers',
+                    'km' => 'Actual km',
                     'name' => 'Name',
                     'description' => 'Description',
                     'time_spent' => 'Time spent',
                     'price' => 'Price',
                     'date' => 'Date'
+                ],
+                'messages' => [
+                    'service_created' => 'Service has been successfully created.',
+                    'service_deleted' => 'Service has been successfully deleted.',
+                    'service_updated' => 'Service has been successfully updated.'
                 ]
             ],
             'customers' => [
@@ -120,7 +126,9 @@ return [
             'update' => 'Update',
             'delete_msg' => 'Are you sure that you want to delete?',
             'add' => 'Add',
-            'version' => 'Version'
+            'version' => 'Version',
+            'show' => 'Show',
+            'back_to' => 'Back to :where'
         ],
         'validator' => [
             'required' => 'The field :field is required.',

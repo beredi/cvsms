@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="customers">{{ __('messages.admin.menu.customers.name') }}</label>
+                    <label for="customers" class="required">{{ __('messages.admin.menu.customers.name') }}</label>
                     <div class="control-group">
                         <select name="customers" id="customers" placeholder="{{__('messages.admin.general.search-for')}}">
                             <option value=""></option>

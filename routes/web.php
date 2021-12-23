@@ -33,6 +33,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/customers/update/{customer}',[\App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers/delete/{customer}',[\App\Http\Controllers\CustomerController::class, 'destroy'])->name('customers.delete');
     Route::get('/customers/show/{customer}',[\App\Http\Controllers\CustomerController::class, 'show'])->name('customers.show');
+    Route::post('/customer/vehicle/handle', [\App\Http\Controllers\CustomerController::class, 'vehicleHandler'])->name('customer.vehicleHandler');
 
     Route::get('/employees', [\App\Http\Controllers\UserController::class, 'index'])->name('employees.all');
     Route::get('/employees/add',[\App\Http\Controllers\UserController::class, 'create'])->name('employees.create');
@@ -56,6 +57,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/vehicles/update/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'update'])->name('vehicles.update');
     Route::post('/vehicles/models/handle', [\App\Http\Controllers\VehicleController::class, 'ajaxHandler'])->name('vehicles.ajax-handler');
     Route::delete('/vehicles/delete', [\App\Http\Controllers\VehicleController::class, 'destroy'])->name('vehicles.delete');
+    Route::get('/vehicles/show/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'show'])->name('vehicles.show');
 
     Route::get('/vehicles/config/type/create', [\App\Http\Controllers\VehicleTypeController::class, 'create'])->name('vehicletype.create');
     Route::post('/vehicles/config/type/store', [\App\Http\Controllers\VehicleTypeController::class, 'store'])->name('vehicletype.store');
@@ -76,6 +78,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/vehicles/config/model/delete',[\App\Http\Controllers\VehicleModelController::class, 'destroy'])->name('vehiclemodel.delete');
 
     Route::get('/services', [\App\Http\Controllers\ServiceController::class, 'index'])->name('services.all');
+    Route::get('/services/create', [\App\Http\Controllers\ServiceController::class, 'create'])->name('services.create');
+    Route::post('/services/store', [\App\Http\Controllers\ServiceController::class, 'store'])->name('services.store');
+    Route::delete('/services/delete', [\App\Http\Controllers\ServiceController::class, 'destroy'])->name('services.delete');
+    Route::get('/services/edit/{service}', [\App\Http\Controllers\ServiceController::class, 'edit'])->name('services.edit');
+    Route::patch('/services/update/{service}', [\App\Http\Controllers\ServiceController::class, 'update'])->name('services.update');
+    Route::get('/services/show/{service}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
 
     Route::get('/changelog', [\App\Http\Controllers\HomeController::class, 'changelog'])->name('changelog');
     Route::get('/', function () {

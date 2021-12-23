@@ -19,10 +19,10 @@ class CreateServicesTable extends Migration
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->date('date');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('kilometers');
             $table->integer('time_spent');
-            $table->double('price');
+            $table->double('price')->nullable();
             $table->unsignedInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('users');
 

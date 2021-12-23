@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <h2 class="float-left">{{__('messages.admin.menu.services.all-records')}}</h2>
             @can('create', \App\Models\Vehicle::class)
-                <a href="{{route('vehicles.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus-circle"></i> {{__('messages.admin.menu.services.new-record')}}</a>
+                <a href="{{route('services.create')}}" class="float-right btn btn-sm btn-success"><i class="fas fa-plus-circle"></i> {{__('messages.admin.menu.services.new-record')}}</a>
             @endcan
         </div>
     </div>
@@ -39,6 +39,7 @@
             <table id='all-customers' class="display" style="width:100%">
                 <thead>
                 <tr>
+                    <th>{{__('messages.admin.general.show')}}</th>
                     <th>{{__('messages.admin.menu.vehicles.name')}}</th>
                     <th>{{__('messages.admin.menu.customers.name')}}</th>
                     <th>{{__('messages.admin.menu.services.service.name')}}</th>
@@ -56,6 +57,7 @@
                 @if($services->isNotEmpty())
                     @foreach($services as $service)
                         <tr>
+                            <td><a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
                             <td><a href="#" class="text-dark">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
                             <td>{{$service->vehicle->customer->fullName()}}</td>
                             <td>{{$service->name}}</td>
@@ -67,11 +69,11 @@
                             <td>{{date('d. m. Y.', strtotime($service->date))}}</td>
                             <td class="text-center">
                                 @can('update', $service)
-                                    <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="{{route('services.edit', ['service' => $service->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                                 @endcan
                             </td>
                             <td class="text-center">
-                                @can('delete', \App\Models\Vehicle::class)
+                                @can('delete', $service)
                                     <a href="#" data-id="{{$service->id}}" class="btn btn-sm btn-danger delete-button"  data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></a>
 
 
@@ -98,7 +100,7 @@
                 <div class="modal-body">{{__('messages.admin.general.delete_msg')}}</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">{{__('messages.admin.general.cancel')}}</button>
-                    <form action="" method="POST">
+                    <form action="{{route('services.delete')}}" method="POST">
                         @method('DELETE')
                         @csrf
                         <input type="hidden" value="" name="thing_id" id="thing_id">

@@ -144,4 +144,11 @@ class Vehicle extends Model
     public function services(){
         return $this->hasMany(Service::class);
     }
+
+    /**
+     * @return string
+     */
+    public function displayName(){
+        return '(' . $this->type->type . ') ' . $this->brand()->name . ' ' . $this->model->name . ' - ' . $this->year;
+    }
 }

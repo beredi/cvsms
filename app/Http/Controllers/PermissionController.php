@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class PermissionController extends Controller
         $permissions = array(
             'user' => User::getPermissions(),
             'customers' => Customer::getPermissions(),
-            'vehicles' => Vehicle::getPermissions()
+            'vehicles' => Vehicle::getPermissions(),
+            'services' => Service::getPermissions()
         );
         return view('admin.admin.permissions', [
             'roles' => Role::all(),

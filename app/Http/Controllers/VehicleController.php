@@ -74,7 +74,7 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        //
+        return view('admin.vehicle.show', ['vehicle' => $vehicle]);
     }
 
     /**

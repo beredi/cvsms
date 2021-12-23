@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Cassandra\Custom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use MongoDB\Driver\Session;
@@ -142,5 +143,10 @@ class CustomerController extends Controller
         session()->flash('customer-deleted', __('messages.admin.menu.customers.deleted_customer', ['name' => $customer->name, 'lastname' => $customer->lastname]));
 
         return redirect(route('customers.all'));
+    }
+
+    public function vehicleHandler(Request $request){
+        $customer = Customer::findOrFail($request->get('customerID'));
+        return response()->json(array($customer->vehiclesToArray()), 200);
     }
 }

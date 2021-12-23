@@ -31,17 +31,12 @@
 
     {{--Employees--}}
     <x-admin.nav.employees></x-admin.nav.employees>
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
+{{--    <!-- Heading -->
     <div class="sidebar-heading">
         Addons
     </div>
 
-    <x-admin-addons></x-admin-addons>
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-    <x-admin.nav.changelog></x-admin.nav.changelog>
+    <x-admin-addons></x-admin-addons>--}}
 
 
     @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
@@ -52,6 +47,9 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+    <x-admin.nav.changelog></x-admin.nav.changelog>
+
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

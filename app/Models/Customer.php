@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Collection;
 
 class Customer extends Model
 {
@@ -112,9 +114,28 @@ class Customer extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Support\Collection
      */
     public function services(){
-        return $this->hasMany(Service::class);
+        $vehicles = array();
+        foreach ($this->vehicles as $vehicle){
+            $vehicles[] = $vehicle->id;
+        }
+
+        return Service::whereIn('vehicle_id', $vehicles)
+            ->get();
+
+    }
+
+    /**
+     * @return array
+     */
+    public function vehiclesToArray(){
+        $vehicles = array();
+        foreach ($this->vehicles as $vehicle){
+            $vehicles[$vehicle->id] = $vehicle->displayName();
+        }
+
+        return $vehicles;
     }
 }
