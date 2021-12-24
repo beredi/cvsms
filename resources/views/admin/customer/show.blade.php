@@ -45,6 +45,7 @@
         <table id='vehicles' class="display" style="width:100%">
             <thead>
             <tr>
+                <th>{{__('messages.admin.general.show')}}</th>
                 <th>{{__('messages.admin.menu.vehicles.vehicle.type')}}</th>
                 <th>{{__('messages.admin.menu.vehicles.vehicle.brand')}}</th>
                 <th>{{__('messages.admin.menu.vehicles.vehicle.model')}}</th>
@@ -59,6 +60,7 @@
             <tbody>
                 @foreach($customer->vehicles as $vehicle)
                     <tr>
+                        <td><a href="{{route('vehicles.show', ['vehicle' => $vehicle->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
                         <td>{{$vehicle->type->type}}</td>
                         <td>{{$vehicle->brand()->name}}</td>
                         <td>{{$vehicle->model->name}}</td>

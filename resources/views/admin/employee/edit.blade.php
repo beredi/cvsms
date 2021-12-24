@@ -83,6 +83,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="employed_to">{{ __('messages.admin.menu.employees.employee.employed_to') }}</label>
+                    <input id="employed_to" type="date" class="form-control @error('employed_to') is-invalid @enderror" name="employed_to" value="{{$employee->employed_to}}">
+
+                    @error('employed_to')
+                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="address">{{ __('messages.admin.menu.customers.customer.address') }}</label>
                     <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{$employee->address}}">
 

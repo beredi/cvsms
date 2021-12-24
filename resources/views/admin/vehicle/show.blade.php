@@ -122,13 +122,13 @@
                     <tr>
                         <td><a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
                         <td><a href="#" class="text-dark">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
-                        <td>{{$vehicle->customer->fullName()}}</td>
+                        <td><a href="{{route('customers.show', ['customer' => $service->customer()->id])}}" class="text-secondary">{{$vehicle->customer->fullName()}}</a></td>
                         <td>{{$service->name}}</td>
                         <td>{{$service->description}}</td>
                         <td>{{$service->kilometers}}</td>
                         <td>{{$service->time_spent}}</td>
                         <td>{{$service->price}}</td>
-                        <td>{{$service->employee->fullName()}}</td>
+                        <td><a href="{{route('employees.show', ['user' => $service->employee->id])}}" class="text-secondary">{{$service->employee->fullName()}}</a></td>
                         <td>{{date('d. m. Y.', strtotime($service->date))}}</td>
                         <td class="text-center">
                             @can('update', $service)

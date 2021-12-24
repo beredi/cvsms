@@ -40,11 +40,11 @@
                 <thead>
                 <tr>
                     <th>{{__('messages.admin.menu.customers.customer.name')}}</th>
-                    <th>{{__('messages.admin.menu.customers.customer.lastname')}}</th>
                     <th>{{__('messages.admin.menu.customers.customer.email')}}</th>
                     <th>{{__('messages.admin.menu.customers.customer.phone')}}</th>
                     <th>{{__('messages.admin.menu.customers.customer.address')}}</th>
                     <th>{{__('messages.admin.menu.employees.employee.employed_from')}}</th>
+                    <th>{{__('messages.admin.menu.employees.employee.employed_to')}}</th>
                     <th>{{__('messages.admin.menu.employees.employee.user-role')}}</th>
                     <th>{{__('messages.admin.general.edit')}}</th>
                     <th>{{__('messages.admin.general.delete')}}</th>
@@ -54,12 +54,12 @@
                 @if($employees->isNotEmpty())
                     @foreach($employees as $employee)
                         <tr>
-                            <td>{{$employee->name}}</td>
-                            <td>{{$employee->lastname}}</td>
+                            <td><a class="text-secondary" href="{{route('employees.show', ['user' => $employee->id])}}">{{$employee->fullName()}}</a></td>
                             <td>{{$employee->email}}</td>
                             <td>{{$employee->phone}}</td>
                             <td>{{$employee->address}}</td>
                             <td>{{date('d. m. Y', strtotime($employee->employed_from))}}</td>
+                            <td>@if($employee->employed_to !== null){{date('d. m. Y', strtotime($employee->employed_to))}}@endif</td>
                             <td>{{$employee->role->name}}</td>
                             <td class="text-center">
                                 @can('update', $employee)

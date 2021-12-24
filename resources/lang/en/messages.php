@@ -94,6 +94,7 @@ return [
                 'update-record' => 'Update employee',
                 'employee' => [
                     'employed_from' => 'Employed from',
+                    'employed_to' => 'Employed to',
                     'password' => 'Password',
                     'password_confirm' => 'Confirm Password',
                     'user-role' => 'User role'

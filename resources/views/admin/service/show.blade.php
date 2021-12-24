@@ -6,6 +6,9 @@
         <div class="col-md-12">
             <h2 class="text-dark">{{__('messages.admin.menu.services.name')}}</h2>
         </div>
+        <div class="col-md-3 col-sm-12 small">
+            <a href="{{route('services.edit', ['service' => $service->id])}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i> {{__('messages.admin.general.edit')}}</a>
+        </div>
     </div>
     <hr>
     <div class="row mt-2">
@@ -85,7 +88,7 @@
             <i class="fas fa-user-tie"></i> {{\Illuminate\Support\Str::upper(__('messages.admin.menu.employees.name'))}}
         </div>
         <div class="col-md-9 col-sm-12">
-            <strong class="text-primary">{{$service->employee->fullName()}}</strong>
+            <strong class="text-primary"><a href="{{route('employees.show', ['user' => $service->employee->id])}}">{{$service->employee->fullName()}}</a></strong>
         </div>
     </div>
     <hr>

@@ -37,6 +37,7 @@ class User extends Authenticatable
         'email',
         'password',
         'employed_from',
+        'employed_to',
         'address',
         'phone'
     ];
@@ -133,9 +134,10 @@ class User extends Authenticatable
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      */
     public function services(){
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'employee_id');
     }
 
     /**

@@ -61,6 +61,7 @@ class UserController extends Controller
                 'name' => $request['name'],
                 'lastname' => $request['lastname'],
                 'employed_from' => $request['employed_from'],
+                'employed_to' => $request['employed_to'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
                 'phone' => $request['phone'],
@@ -125,6 +126,7 @@ class UserController extends Controller
             $user->phone = $request['phone'];
             $user->address = $request['address'];
             $user->employed_from = $request['employed_from'];
+            $user->employed_to = $request['employed_to'];
             if(!empty($request['password'])){
                 $user->password = Hash::make($request['password']);
             }
