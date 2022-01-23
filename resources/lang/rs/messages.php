@@ -3,8 +3,8 @@
 return [
     'admin' => [
         'dashboard' => [
-            'welcome' => 'Welcome back :Name',
-            'name' => 'Dashboard'
+            'welcome' => 'Dobro došli nazad :Name',
+            'name' => 'Komandna tabla'
         ],
         'menu' => [
             'service' => [
@@ -145,13 +145,13 @@ return [
             'updated-message' => 'Permissions have been updated.'
         ],
         'settings' => [
-            'language' => 'Language',
-            'name' => 'Setting',
-            'plural_name' => 'Settings',
-            'new-record' => 'Add setting',
-            'all-records' => 'All settings',
-            'update-record' => 'Update setting',
-            'settings-for' => 'Settings for :name'
+            'language' => 'Jezik',
+            'name' => 'Podešavanje',
+            'plural_name' => 'Podešavanja',
+            'new-record' => 'Dodaj podešavanje',
+            'all-records' => 'Sva podešavanja',
+            'update-record' => 'Ažuriraj podešavanja',
+            'settings-for' => 'Podešavanja za :name'
         ]
     ]
 

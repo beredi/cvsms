@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
+    $session = new Symfony\Component\HttpFoundation\Session\Session();
+    App::setLocale($session->get('lang'));
 //    Customers
     Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers.all');
     Route::get('/customers/add',[\App\Http\Controllers\CustomerController::class, 'create'])->name('customers.create');
@@ -42,6 +45,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/employees/edit/{user}',[\App\Http\Controllers\UserController::class, 'edit'])->name('employees.edit');
     Route::patch('/employees/update/{user}',[\App\Http\Controllers\UserController::class, 'update'])->name('employees.update');
     Route::delete('/employees/delete/{user}',[\App\Http\Controllers\UserController::class, 'destroy'])->name('employees.delete');
+    Route::get('/employees/settings/{user}',[\App\Http\Controllers\UserController::class, 'settings'])->name('employees.settings');
+
+    Route::post('/settings/store',[\App\Http\Controllers\SettingController::class, 'store'])->name('settings.store');
 
     Route::get('/permissions', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permissions.all');
     Route::post('/permissions/handle', [\App\Http\Controllers\PermissionController::class, 'ajaxHandler'])->name('permissions.ajax-handler');

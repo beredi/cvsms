@@ -135,7 +135,6 @@
 @section('scripts')
     <script>
         $(function (){
-
             $('#role').selectize();
         });
     </script>

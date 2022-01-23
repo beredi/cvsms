@@ -10,14 +10,14 @@
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             {{__('messages.admin.menu.user.profile')}}
         </a>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="{{route('employees.settings', ['user' => \Illuminate\Support\Facades\Auth::user()])}}">
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
             {{__('messages.admin.menu.user.settings')}}
         </a>
-        <a class="dropdown-item" href="#">
+        {{--<a class="dropdown-item" href="#">
             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
             {{__('messages.admin.menu.user.activity-log')}}
-        </a>
+        </a>--}}
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

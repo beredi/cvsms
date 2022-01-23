@@ -146,4 +146,37 @@ class User extends Authenticatable
     public function fullName(){
         return $this->name . ' ' . $this->lastname;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function settings(){
+        return $this->hasMany(Setting::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function language(){
+        $lang = '';
+        foreach ($this->settings as $setting){
+            if ($setting->name == Setting::LANGUAGE) $lang = $setting->value;
+        }
+
+        return $lang;
+    }
+
+    /**
+     * @param $name
+     * @return false|mixed
+     */
+    public function findSetting($name)    {
+        $result = false;
+        foreach ($this->settings as $setting) {
+            if ($setting->name == $name) $result = $setting;
+        }
+
+        return $result;
+    }
+
 }

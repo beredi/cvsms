@@ -150,8 +150,7 @@ return [
             'plural_name' => 'Settings',
             'new-record' => 'Add setting',
             'all-records' => 'All settings',
-            'update-record' => 'Update setting',
-            'settings-for' => 'Settings for :name'
+            'update-record' => 'Update setting'
         ]
     ]
 

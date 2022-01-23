@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Setting;
 use App\Models\User;
+use Hamcrest\Core\Set;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -68,6 +71,9 @@ class UserController extends Controller
                 'address' => $request['address']
             ]);
             $user->role()->associate(Role::where(['slug' => $request['role']])->firstOrFail());
+            $setting = new Setting();
+            $setting->setLanguage('rs');
+            $user->settings()->save($setting);
             $user->save();
             session()->flash('employee-created', __('messages.admin.menu.employees.created_employee', ['name' => $user->name, 'lastname' => $user->lastname]));
         }
@@ -99,7 +105,7 @@ class UserController extends Controller
             return view('admin.employee.edit', ['employee' => $user, 'roles' => Role::all()]);
         }
         else {
-            throw new AuthorizationException('ahojky');
+            throw new AuthorizationException('Not authorized');
         }
     }
 
@@ -155,5 +161,16 @@ class UserController extends Controller
         session()->flash('employee-deleted', __('messages.admin.menu.employees.deleted_employee', ['name' => $user->name, 'lastname' => $user->lastname]));
 
         return redirect(route('employees.all'));
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws AuthorizationException
+     */
+    public function settings(User $user)
+    {
+        $this->authorize('update', $user);
+        return view('admin.employee.settings', ['user' => $user]);
     }
 }
