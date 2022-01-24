@@ -23,6 +23,8 @@
                 <td width="10%">Beta 1.11</td>
                 <td>
                     <ul>
+                        <li>Permissions- disabled checkboxes for admin permissions</li>
+                        <li>Translated to Serbian</li>
                         <li>Vehicles - chassis num changed to string</li>
                     </ul>
                 </td>

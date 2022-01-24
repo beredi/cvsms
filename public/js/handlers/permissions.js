@@ -17,10 +17,15 @@ $(document).ready(function() {
             data: formData,
             dataType: 'json',
             success: function (data) {
+                let disabledVar = true;
                 $('input[type=checkbox]').attr('checked', false);
                 $.each(data, function (key, val) {
                     $('#'+key).attr('checked', 'true');
                 });
+                if (formData.roleSlug !== 'admin'){
+                    disabledVar = false;
+                }
+                $('input[type=checkbox]').attr('disabled', disabledVar);
             },
             error: function (data) {
                 console.log(data);

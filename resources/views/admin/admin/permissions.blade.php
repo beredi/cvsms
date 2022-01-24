@@ -39,7 +39,7 @@
                         <div class="col-md-12">
                             @foreach($permissionsPerModel as $slug => $name)
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="permissions-checked[]" id="{{$slug}}" value="{{$slug}}" @if($userRole->hasPermission($slug)) checked @endif>
+                                <input class="form-check-input" type="checkbox" name="permissions-checked[]" id="{{$slug}}" value="{{$slug}}" @if($userRole->hasPermission($slug)) checked @endif @if($userRole->name == \App\Models\Role::ADMIN) disabled @endif >
                                 <label class="form-check-label" for="{{$slug}}">{{$name}}</label>
                             </div>
                             @endforeach
