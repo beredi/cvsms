@@ -33,8 +33,8 @@ return [
                     'year' => 'Year of production',
                     'chassis_num' => 'Chassis number',
                     'engine' => 'Enginge',
-                    'engine_volume' => 'Engine volume',
-                    'engine_power' => 'Engine power',
+                    'engine_volume' => 'Engine volume [cm3]',
+                    'engine_power' => 'Engine power [kW]',
                     'transmission' => 'Transmission'
                 ],
                 'messages' => [
