@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-group">
                     <label for="chassis_num">{{__('messages.admin.menu.vehicles.vehicle.chassis_num')}}</label>
-                    <input type="number" step="0.01" name="chassis_num" class="form-control @error('chassis_num') is-invalid @enderror" value="{{ old('chassis_num') }}">
+                    <input type="text" name="chassis_num" class="form-control @error('chassis_num') is-invalid @enderror" value="{{ old('chassis_num') }}">
                 </div>
                 <div class="form-group">
                     <label for="year">{{ __('messages.admin.menu.vehicles.vehicle.year') }}</label>
