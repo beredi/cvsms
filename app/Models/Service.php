@@ -19,6 +19,7 @@ class Service extends Model
         'description',
         'kilometers',
         'time_spent',
+        'paid',
         'price'
     ];
 
