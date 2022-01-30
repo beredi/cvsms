@@ -36,7 +36,7 @@
     @endif
     <div class="row">
         <div class="col-md-12">
-            <table id='all-customers' class="display" style="width:100%">
+            <table id='all-services' class="display" style="width:100%">
                 <thead>
                 <tr>
                     <th>{{__('messages.admin.general.show')}}</th>
@@ -59,7 +59,7 @@
                         <tr>
                             <td><a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
                             <td><a href="{{route('vehicles.show', ['vehicle' => $service->vehicle->id])}}" class="text-secondary">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
-                            <td>{{$service->vehicle->customer->fullName()}}</td>
+                            <td><a class="text-dark" href="{{route('customers.show', ['customer' => $service->vehicle->customer->id])}}">{{$service->vehicle->customer->fullName()}}</a></td>
                             <td>{{$service->name}}</td>
                             <td>{{$service->description}}</td>
                             <td>{{$service->kilometers}}</td>
@@ -116,9 +116,6 @@
     <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
-
     <script>
         $(document).ready(function() {
             $('body').on('click','.delete-button',function (){
@@ -126,5 +123,10 @@
             });
         });
 
+        $(document).ready(function() {
+            $('#all-services').DataTable( {
+                "order": []
+            } );
+        });
     </script>
 @endsection

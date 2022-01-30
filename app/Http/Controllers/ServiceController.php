@@ -19,7 +19,7 @@ class ServiceController extends Controller
     {
         $this->authorize('viewAny', Service::class);
 
-        return view('admin.service.index', ['services' => Service::all()]);
+        return view('admin.service.index', ['services' => Service::all()->sortByDesc('id')]);
     }
 
     /**

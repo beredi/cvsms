@@ -2,12 +2,14 @@
 
 @section('content')
     @include('admin.includes.breadcrumb', ['route' => 'customers.all', 'where' => __('messages.admin.menu.customers.plural_name')])
+    @can('update', $customer)
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-dark">{{$customer->fullName()}}</h2>
             <a href="{{route('customers.edit', ['customer' => $customer->id])}}" class="btn btn-primary btn-sm text-left"><i class="fas fa-user-edit"></i> {{__('messages.admin.general.edit')}}</a>
         </div>
     </div>
+    @endcan
     <hr>
     <div class="row mt-2">
         <div class="col-md-1 col-sm-12 small mt-1">
@@ -108,14 +110,14 @@
                 @foreach($customer->services() as $service)
                     <tr>
                         <td><a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
-                        <td><a href="#" class="text-dark">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
+                        <td><a href="{{route('vehicles.show', ['vehicle' => $service->vehicle->id])}}" class="text-dark">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
                         <td>{{$customer->fullName()}}</td>
                         <td>{{$service->name}}</td>
                         <td>{{$service->description}}</td>
                         <td>{{$service->kilometers}}</td>
                         <td>{{$service->time_spent}}</td>
                         <td>{{$service->price}}</td>
-                        <td>{{$service->employee->fullName()}}</td>
+                        <td><a class="text-dark" href="{{route('employees.show', ['user' => $service->employee->id])}}">{{$service->employee->fullName()}}</a></td>
                         <td>{{date('d. m. Y.', strtotime($service->date))}}</td>
                         <td class="text-center">
                             @can('update', $service)

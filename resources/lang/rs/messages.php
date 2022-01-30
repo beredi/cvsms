@@ -56,7 +56,7 @@ return [
                     'km' => 'Kilometraža',
                     'name' => 'Naziv',
                     'description' => 'Opis',
-                    'time_spent' => 'Potrošeno vreme',
+                    'time_spent' => 'Vreme',
                     'price' => 'Cena',
                     'date' => 'Datum'
                 ],

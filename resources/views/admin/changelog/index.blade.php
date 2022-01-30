@@ -19,6 +19,15 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">30.01.2022</td>
+                <td width="10%">Beta 1.12</td>
+                <td>
+                    <ul>
+                        <li>Set localization on login</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">24.01.2022</td>
                 <td width="10%">Beta 1.11</td>
                 <td>

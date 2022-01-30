@@ -63,8 +63,8 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\Customer::factory(50)->create();
+        /*\App\Models\User::factory(10)->create();
+        \App\Models\Customer::factory(50)->create();*/
 
         $jsonPath = public_path('\json\car-list.json');
         $carListJSON = file_get_contents($jsonPath);

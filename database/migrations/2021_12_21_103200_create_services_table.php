@@ -21,7 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('kilometers');
-            $table->integer('time_spent');
+            $table->double('time_spent');
             $table->double('price')->nullable();
             $table->unsignedInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('users');

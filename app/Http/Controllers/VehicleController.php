@@ -20,7 +20,7 @@ class VehicleController extends Controller
     {
         $this->authorize('viewAny', Vehicle::class);
 
-        return view('admin.vehicle.index', ['vehicles' => Vehicle::all()]);
+        return view('admin.vehicle.index', ['vehicles' => Vehicle::all()->sortByDesc('id')]);
     }
 
     /**

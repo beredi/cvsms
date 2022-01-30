@@ -73,7 +73,7 @@
                     <input type="number" step="0.01" name="engine_volume" class="form-control @error('engine_volume') is-invalid @enderror" value="{{ $vehicle->engine_volume }}">
                 </div>
                 <div class="form-group">
-                    <label for="engine_power">{{__('messages.admin.menu.vehicles.vehicle.engine_power')}} [kW] </label>
+                    <label for="engine_power">{{__('messages.admin.menu.vehicles.vehicle.engine_power')}} </label>
                     <input type="number" step="0.01" name="engine_power" class="form-control @error('engine_power') is-invalid @enderror" value="{{ $vehicle->engine_power }}">
                 </div>
                 <div class="form-group">

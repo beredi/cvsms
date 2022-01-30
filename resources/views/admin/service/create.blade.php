@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <label for="date" class="required">{{__('messages.admin.menu.services.service.date')}} [RSD]</label>
-                    <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required>
+                    <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ (!empty(old('date'))) ? old('date') : date('Y-m-d', strtotime('today')) }}" required >
                 </div>
 
 

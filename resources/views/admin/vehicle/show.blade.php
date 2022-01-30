@@ -4,9 +4,16 @@
     @include('admin.includes.breadcrumb', ['route' => 'vehicles.all', 'where' => __('messages.admin.menu.vehicles.plural_name')])
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-22">
-            <h2 class="text-dark">{{__('messages.admin.menu.vehicles.name')}}</h2>
+            <h2 class="text-dark"><span class="text-muted">{{__('messages.admin.menu.vehicles.name')}}</span> - {{$vehicle->displayName()}}</h2>
         </div>
     </div>
+    @can('update', $vehicle)
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{route('vehicles.edit', ['vehicle' => $vehicle->id])}}" class="btn btn-primary btn-sm text-left"><i class="fas fa-user-edit"></i> {{__('messages.admin.general.edit')}}</a>
+            </div>
+        </div>
+    @endcan
     <hr>
     <div class="row mt-2">
         <div class="col-md-2 col-sm-12 small mt-1">
