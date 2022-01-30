@@ -73,7 +73,7 @@
                         <td>{{$vehicle->transmission}}</td>
                         <td class="text-center">
                             @can('update', $vehicle)
-                                <a href="{{route('customers.edit', ['customer' => $vehicle->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{route('vehicles.edit', ['vehicle' => $vehicle->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                             @endcan
                         </td>
                     </tr>
