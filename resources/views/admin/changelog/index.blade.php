@@ -23,6 +23,7 @@
                 <td width="10%">Beta 1.12</td>
                 <td>
                     <ul>
+                        <li>Added favicon</li>
                         <li>Set localization on login</li>
                     </ul>
                 </td>
