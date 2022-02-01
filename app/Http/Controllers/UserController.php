@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = (Auth::user()->cannot('viewAny', User::class)) ? User::where('id', Auth::user()->id)->get() : User::all();
+        $users = (Auth::user()->cannot('viewAny', User::class)) ? User::where('id', Auth::user()->id)->get() : User::all()->sortByDesc('id');
         return view('admin.employee.index', ['employees' => $users]);
     }
 

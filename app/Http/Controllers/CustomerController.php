@@ -18,7 +18,7 @@ class CustomerController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Customer::class);
-        return view('admin.customer.index', ['customers' => Customer::all()]);
+        return view('admin.customer.index', ['customers' => Customer::all()->sortByDesc('id')]);
     }
 
     /**

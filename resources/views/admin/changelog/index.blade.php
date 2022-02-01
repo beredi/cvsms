@@ -23,6 +23,7 @@
                 <td width="10%">Beta 1.13</td>
                 <td>
                     <ul>
+                        <li>Customer - added owe to customer show</li>
                         <li>Services - added paid</li>
                     </ul>
                 </td>

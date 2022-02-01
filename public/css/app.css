@@ -44,20 +44,27 @@
     color: #ffffff;
     text-decoration: none;
 }
-div.paid {
+div.pay {
     width: 20px;
     height: 20px;
     margin: 0 auto;
-    background: #81f586;
     padding: 0;
     border-radius: 50%;
 }
 
-div.unpaid {
-    width: 20px;
-    height: 20px;
-    margin: 0 auto;
+.paid{
+    background: #81f586;
+}
+
+.unpaid{
     background: #f15b76;
-    padding: 0;
-    border-radius: 50%;
+}
+
+.owe-display{
+    display: block;
+    padding: 5px 20px;
+    text-align: center;
+    color: white;
+    margin: 5px 0px;
+    border-radius: 35px;
 }

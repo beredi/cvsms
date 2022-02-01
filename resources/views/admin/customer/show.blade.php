@@ -4,9 +4,20 @@
     @include('admin.includes.breadcrumb', ['route' => 'customers.all', 'where' => __('messages.admin.menu.customers.plural_name')])
     @can('update', $customer)
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h2 class="text-dark">{{$customer->fullName()}}</h2>
             <a href="{{route('customers.edit', ['customer' => $customer->id])}}" class="btn btn-primary btn-sm text-left"><i class="fas fa-user-edit"></i> {{__('messages.admin.general.edit')}}</a>
+        </div>
+        <div class="col-md-6">
+            <div class="owe-display float-right
+                @if($customer->owe == 0)
+                    paid
+                @else
+                    unpaid
+                @endif
+                ">
+                <i class="fas fa-dollar-sign"></i> {{__('messages.admin.menu.customers.customer.owe')}}: <strong>{{ ($customer->owe) ? $customer->owe : 0 }} RSD</strong>
+            </div>
         </div>
     </div>
     @endcan
@@ -37,14 +48,14 @@
             <strong class="text-primary">{{$customer->phone}}</strong>
         </div>
     </div>
-    <hr>
 
     @if($customer->vehicles->isNotEmpty())
+        <hr>
         <div class="row mt-2">
             <div class="col-md-1 col-sm-12 small">
                 <i class="fas fa-car-side"></i> {{\Illuminate\Support\Str::upper(__('messages.admin.menu.vehicles.plural_name'))}}
             </div>
-        <table id='vehicles' class="display" style="width:100%">
+            <table id='vehicles' class="display" style="width:100%">
             <thead>
             <tr>
                 <th>{{__('messages.admin.general.show')}}</th>
@@ -80,7 +91,6 @@
                 @endforeach
             </tbody>
         </table>
-
         </div>
     @endif
 
