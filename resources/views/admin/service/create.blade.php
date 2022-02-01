@@ -53,7 +53,11 @@
                 </div>
                 <div class="form-group">
                     <label for="price">{{__('messages.admin.menu.services.service.price')}} [RSD]</label>
-                    <input type="number" step="0.01" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}">
+                    <input type="number" id="price" step="0.01" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}">
+                </div>
+                <div class="form-group">
+                    <label for="paid">{{__('messages.admin.menu.services.service.paid')}} [RSD]</label>
+                    <input type="number" id="paid" step="0.01" name="paid" class="form-control @error('paid') is-invalid @enderror" value="{{ empty(old('paid')) ? 0 : old('paid') }}">
                 </div>
                 <div class="form-group">
                     <label for="date" class="required">{{__('messages.admin.menu.services.service.date')}} [RSD]</label>

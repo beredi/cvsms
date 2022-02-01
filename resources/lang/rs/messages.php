@@ -51,13 +51,15 @@ return [
                 'plural_name' => 'Servisi',
                 'new-record' => 'Nova evidencija o servisu',
                 'update-record' => 'Ažuriranje evidencije o servisu',
-                'all-records' => 'Sve evidencije o servisu',
+                'all-records' => 'Sve evidencije o servisima',
                 'service' => [
                     'km' => 'Kilometraža',
                     'name' => 'Naziv',
                     'description' => 'Opis',
                     'time_spent' => 'Vreme',
                     'price' => 'Cena',
+                    'paid' => 'Plaćeno',
+                    'unpaid' => 'Neplaćeno',
                     'date' => 'Datum'
                 ],
                 'messages' => [

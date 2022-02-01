@@ -58,6 +58,8 @@ return [
                     'description' => 'Description',
                     'time_spent' => 'Time spent',
                     'price' => 'Price',
+                    'paid' => 'Paid',
+                    'unpaid' => 'Unpaid',
                     'date' => 'Date'
                 ],
                 'messages' => [

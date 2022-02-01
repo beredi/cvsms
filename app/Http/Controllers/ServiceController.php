@@ -50,9 +50,16 @@ class ServiceController extends Controller
         $service->kilometers = $request->get('kilometers');
         $service->time_spent = $request->get('time_spent');
         $service->price = $request->get('price');
-        $service->price = $request->get('price');
+        $service->paid = $request->get('paid');
         $service->date = $request->get('date');
         $service->employee()->associate(Auth::user());
+
+        // If customer didn't pay for service, set his 'owe'
+        if($service->price != $service->paid){
+            $customer = $service->customer();
+            $customer->owe += $service->price - $service->paid;
+            $customer->save();
+        }
 
         $service->save();
         session()->flash('service-created', __('messages.admin.menu.services.messages.service_created'));
@@ -107,10 +114,31 @@ class ServiceController extends Controller
         $service->description = $request->get('description');
         $service->kilometers = $request->get('kilometers');
         $service->time_spent = $request->get('time_spent');
-        $service->price = $request->get('price');
-        $service->price = $request->get('price');
+        $price = $request->get('price');
+        $paid = $request->get('paid');
         $service->date = $request->get('date');
         $service->employee()->associate(Auth::user());
+        $customer = $service->customer();
+//        TODO: think about all possible situations
+        if ($service->price != $price && $service->paid == $paid){
+            $difference = $price - $service->price;
+            $service->price = $price;
+            $customer->owe += $difference;
+            $customer->save();
+        }
+        elseif ($service->price != $price && $service->paid == $paid && $price == $paid){
+            $difference = $service->price - $service->paid;
+            $customer->owe += $difference;
+            $customer->save();
+        }
+        elseif ($service->price != $price && $service->paid == $paid && $price != $paid){
+            $differencePrice = $price - $service->price;
+            $differencePaid = $paid - $service->paid;
+            $difference = $differencePrice - $differencePaid;
+            $customer->owe += $difference;
+            $customer->save();
+        }
+
 
         $service->save();
         session()->flash('service-updated', __('messages.admin.menu.services.messages.service_updated'));

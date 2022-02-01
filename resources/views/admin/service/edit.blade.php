@@ -64,6 +64,10 @@
                     <input type="number" step="0.01" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $service->price }}">
                 </div>
                 <div class="form-group">
+                    <label for="paid">{{__('messages.admin.menu.services.service.paid')}} [RSD]</label>
+                    <input type="number" step="0.01" name="paid" class="form-control @error('paid') is-invalid @enderror" value="{{ $service->paid }}">
+                </div>
+                <div class="form-group">
                     <label for="date" class="required">{{__('messages.admin.menu.services.service.date')}} [RSD]</label>
                     <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ $service->date }}" required>
                 </div>

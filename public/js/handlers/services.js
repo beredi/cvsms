@@ -34,4 +34,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('input#price').change(function (e){
+        e.preventDefault();
+        let paid = $('input#paid');
+        if (paid.val() == 0){
+            paid.val($(this).val());
+        }
+    });
 });

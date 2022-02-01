@@ -39,7 +39,8 @@
             <table id='all-services' class="display" style="width:100%">
                 <thead>
                 <tr>
-                    <th>{{__('messages.admin.general.show')}}</th>
+                    <th><i class="fas fa-coins"></i></th>
+                    <th><i class="far fa-eye"></i></th>
                     <th>{{__('messages.admin.menu.vehicles.name')}}</th>
                     <th>{{__('messages.admin.menu.customers.name')}}</th>
                     <th>{{__('messages.admin.menu.services.service.name')}}</th>
@@ -57,7 +58,18 @@
                 @if($services->isNotEmpty())
                     @foreach($services as $service)
                         <tr>
-                            <td><a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
+                            <td>
+                                @if($service->paid == $service->price)
+                                    <div class="paid" title="{{__('messages.admin.menu.services.service.paid')}}"></div>
+                                @else
+                                    <div class="unpaid" title="{{__('messages.admin.menu.services.service.unpaid')}} - {{__('messages.admin.menu.customers.customer.owe')}}: {{ $service->price - $service->paid }}"></div>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary" title="{{__('messages.admin.general.show')}}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
                             <td><a href="{{route('vehicles.show', ['vehicle' => $service->vehicle->id])}}" class="text-secondary">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
                             <td><a class="text-dark" href="{{route('customers.show', ['customer' => $service->vehicle->customer->id])}}">{{$service->vehicle->customer->fullName()}}</a></td>
                             <td>{{$service->name}}</td>
