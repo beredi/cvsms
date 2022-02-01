@@ -59,11 +59,21 @@
                     @foreach($services as $service)
                         <tr>
                             <td>
+                                <div class="pay
                                 @if($service->paid == $service->price)
-                                    <div class="paid" title="{{__('messages.admin.menu.services.service.paid')}}"></div>
+                                    paid
                                 @else
-                                    <div class="unpaid" title="{{__('messages.admin.menu.services.service.unpaid')}} - {{__('messages.admin.menu.customers.customer.owe')}}: {{ $service->price - $service->paid }}"></div>
+                                    unpaid
                                 @endif
+                                    "
+                                     title="
+
+                                @if($service->paid == $service->price)
+                                     {{__('messages.admin.menu.services.service.paid')}}
+                                @else
+                                     {{__('messages.admin.menu.services.service.unpaid')}}
+                                @endif
+                                "></div>
                             </td>
                             <td class="text-center">
                                 <a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary" title="{{__('messages.admin.general.show')}}">
