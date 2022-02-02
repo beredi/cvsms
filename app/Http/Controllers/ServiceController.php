@@ -118,27 +118,25 @@ class ServiceController extends Controller
         $paid = $request->get('paid');
         $service->date = $request->get('date');
         $service->employee()->associate(Auth::user());
-        $customer = $service->customer();
-//        TODO: think about all possible situations
-        if ($service->price != $price && $service->paid == $paid){
-            $difference = $price - $service->price;
-            $service->price = $price;
-            $customer->owe += $difference;
-            $customer->save();
-        }
-        elseif ($service->price != $price && $service->paid == $paid && $price == $paid){
-            $difference = $service->price - $service->paid;
-            $customer->owe += $difference;
-            $customer->save();
-        }
-        elseif ($service->price != $price && $service->paid == $paid && $price != $paid){
-            $differencePrice = $price - $service->price;
-            $differencePaid = $paid - $service->paid;
-            $difference = $differencePrice - $differencePaid;
+
+        // Recalculate customer owe
+        if ($service->price != $price || $service->paid != $paid){
+            $customer = $service->customer();
+            if ($service->price != $price && $service->paid == $paid){
+                $difference = $price - $service->price;
+            }
+            elseif ($service->price == $price && $service->paid != $paid){
+                $difference = $service->paid - $paid;
+            }
+            else{
+                $difference = -1*($service->price - $service->paid) + ($price - $paid);
+            }
             $customer->owe += $difference;
             $customer->save();
         }
 
+        $service->price = $price;
+        $service->paid = $paid;
 
         $service->save();
         session()->flash('service-updated', __('messages.admin.menu.services.messages.service_updated'));
