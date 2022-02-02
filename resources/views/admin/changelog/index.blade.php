@@ -19,6 +19,15 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">02. 02. 2022</td>
+                <td width="10%">Beta 1.14</td>
+                <td>
+                    <ul>
+                        <li>Services - Added logic to service edit (price and paid changes)</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">01. 02. 2022</td>
                 <td width="10%">Beta 1.13</td>
                 <td>
