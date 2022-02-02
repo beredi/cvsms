@@ -52,19 +52,50 @@ div.pay {
     border-radius: 50%;
 }
 
-.paid{
+.paid {
     background: #81f586;
 }
 
-.unpaid{
+.unpaid {
     background: #f15b76;
 }
 
-.owe-display{
+.owe-display {
     display: block;
     padding: 5px 20px;
     text-align: center;
     color: white;
     margin: 5px 0px;
     border-radius: 35px;
+}
+
+.dashboard-card-wrapper {
+    padding: 10px;
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    border-radius: 30px;
+    border: 1px solid #7c7c7c;
+    margin: 0 auto;
+    padding: 10px;
+    color: white;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-card:hover {
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
 }

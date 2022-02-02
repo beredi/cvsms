@@ -23,6 +23,7 @@
                 <td width="10%">Beta 1.14</td>
                 <td>
                     <ul>
+                        <li>Dashboard - Created links</li>
                         <li>Services - Added logic to service edit (price and paid changes)</li>
                     </ul>
                 </td>
