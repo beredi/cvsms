@@ -61,46 +61,11 @@
         <hr>
         <div class="row mt-2">
             <div class="col-md-1 col-sm-12 small">
-                <i class="fas fa-cog"></i> {{\Illuminate\Support\Str::upper(__('messages.admin.menu.services.plural_name'))}}
+                <i class="fas fa-cog"></i> {{\Illuminate\Support\Str::upper(__('messages.admin.menu.services.plural_name'))}} ({{count($user->services)}})
             </div>
-            <table id='services' class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <th>{{__('messages.admin.general.show')}}</th>
-                    <th>{{__('messages.admin.menu.vehicles.name')}}</th>
-                    <th>{{__('messages.admin.menu.customers.name')}}</th>
-                    <th>{{__('messages.admin.menu.services.service.name')}}</th>
-                    <th>{{__('messages.admin.menu.services.service.description')}}</th>
-                    <th>{{__('messages.admin.menu.services.service.km')}}</th>
-                    <th>{{__('messages.admin.menu.services.service.time_spent')}} [h]</th>
-                    <th>{{__('messages.admin.menu.services.service.price')}} [RSD]</th>
-                    <th>{{__('messages.admin.menu.employees.name')}}</th>
-                    <th>{{__('messages.admin.menu.services.service.date')}}</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($user->services as $service)
-                    <tr>
-                        <td><a href="{{route('services.show', ['service' => $service->id])}}" class="text-primary"><i class="fas fa-eye"></i> {{__('messages.admin.general.show')}}</a></td>
-                        <td><a href="{{route('vehicles.show', ['vehicle' => $service->vehicle->id])}}" class="text-secondary">({{$service->vehicle->type->type}}) - {{$service->vehicle->brand()->name}} - {{$service->vehicle->model->name}}</a></td>
-                        <td>{{$service->customer()->fullName()}}</td>
-                        <td>{{$service->name}}</td>
-                        <td>{{$service->description}}</td>
-                        <td>{{$service->kilometers}}</td>
-                        <td>{{$service->time_spent}}</td>
-                        <td>{{$service->price}}</td>
-                        <td>{{$service->employee->fullName()}}</td>
-                        <td>{{date('d. m. Y.', strtotime($service->date))}}</td>
-                        <td class="text-center">
-                            @can('update', $service)
-                                <a href="{{route('services.edit', ['service' => $service->id])}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                            @endcan
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+
+            @include('admin.service._allServices', ['services' => $user->services, 'hide' => 'employee'])
+
         </div>
     @endif
 @endsection
@@ -112,7 +77,7 @@
     <!-- Page level custom scripts -->
     <script>
         $(document).ready(function() {
-            $('#services').DataTable({
+            $('#all-services').DataTable({
                 searching: false,
                 paging: true,
                 info: false,

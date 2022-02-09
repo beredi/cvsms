@@ -23,6 +23,7 @@
                 <td width="10%">Beta 1.15</td>
                 <td>
                     <ul>
+                        <li>Created includes files for show tables</li>
                         <li>VehiclesConfig / Vehicles - Dropdown menu with creating option</li>
                     </ul>
                 </td>
