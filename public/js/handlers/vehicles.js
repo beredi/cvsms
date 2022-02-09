@@ -35,7 +35,10 @@ $(document).ready(function() {
         });
     });
     // load to dropdown
-    $('#type, #brand, #models, #customers, #year, #transmission').selectize();
+    $('#type, #brand, #models').selectize({
+        create: true
+    });
+    $('#customers, #year, #transmission').selectize();
 
     $("select#brand").change(function (e) {
         $.ajaxSetup({

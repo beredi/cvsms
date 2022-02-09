@@ -51,8 +51,37 @@ class VehicleController extends Controller
         $this->authorize('create', Vehicle::class);
 
         $vehicle = new Vehicle();
-        $vehicle->type()->associate(VehicleType::findOrFail($request->get('type')));
-        $vehicle->model()->associate(VehicleModel::findOrFail($request->get('model')));
+
+        $vehicleType = VehicleType::find($request->get('type'));
+        if ($vehicleType === null) {
+            $vehicleType = VehicleType::create([
+                'type' => $request->get('type')
+            ]);
+        }
+        $vehicle->type()->associate($vehicleType);
+
+        $vehicleBrand = VehicleBrand::find($request->get('brand'));
+        if ($vehicleBrand === null) {
+            $vehicleBrand = VehicleBrand::create([
+                'name' => $request->get('brand')
+            ]);
+            $vehicleModel = new VehicleModel();
+            $vehicleModel->name = $request->get('model');
+            $vehicleModel->brand()->associate($vehicleBrand);
+            $vehicleModel->save();
+        }
+        elseif (VehicleModel::find($request->get('model')) === null) {
+            $vehicleModel = new VehicleModel();
+            $vehicleModel->name = $request->get('model');
+            $vehicleModel->brand()->associate($vehicleBrand);
+            $vehicleModel->save();
+        }
+        else {
+            $vehicleModel = VehicleModel::find($request->get('model'));
+        }
+
+        $vehicle->model()->associate($vehicleModel);
+
         if ($request->get('customers') !== null) $vehicle->customer()->associate(Customer::findOrFail($request->get('customers')));
         if ($request->get('engine_volume') !== null) $vehicle->setEngineVolumeAttribute($request->get('engine_volume'));
         if ($request->get('engine_power') !== null) $vehicle->setEnginePowerAttribute($request->get('engine_power'));

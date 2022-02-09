@@ -19,6 +19,15 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">09. 02. 2022</td>
+                <td width="10%">Beta 1.15</td>
+                <td>
+                    <ul>
+                        <li>VehiclesConfig / Vehicles - Dropdown menu with creating option</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">02. 02. 2022</td>
                 <td width="10%">Beta 1.14</td>
                 <td>

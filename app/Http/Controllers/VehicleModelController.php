@@ -39,7 +39,13 @@ class VehicleModelController extends Controller
     {
         $model = new VehicleModel();
         $model->setNameAttribute($request->get('name'));
-        $model->brand()->associate(VehicleBrand::findOrFail($request->get('model')));
+        $brand = VehicleBrand::find($request->get('model'));
+        if ($brand === null){
+            $brand = VehicleBrand::create([
+                'name' => $request->get('model')
+            ]);
+        }
+        $model->brand()->associate($brand);
         $model->save();
 
         session()->flash('vehicle-type-created', __('messages.admin.menu.vehicles.messages.type_created', ['type' => 'Model']));

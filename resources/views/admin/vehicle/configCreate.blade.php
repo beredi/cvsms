@@ -53,7 +53,9 @@
     <!-- Page level custom scripts -->
     <script>
         $(document).ready(function() {
-            $('#{{\App\Models\Vehicle::VEHICLE_MODEL}}').selectize();
+            $('#{{\App\Models\Vehicle::VEHICLE_MODEL}}').selectize({
+                create: true
+            });
         });
     </script>
 @endsection
