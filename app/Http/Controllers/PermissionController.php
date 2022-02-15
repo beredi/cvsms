@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Service;
+use App\Models\StockItem;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class PermissionController extends Controller
             'user' => User::getPermissions(),
             'customers' => Customer::getPermissions(),
             'vehicles' => Vehicle::getPermissions(),
-            'services' => Service::getPermissions()
+            'services' => Service::getPermissions(),
+            'stock' => StockItem::getPermissions()
         );
         return view('admin.admin.permissions', [
             'roles' => Role::all(),

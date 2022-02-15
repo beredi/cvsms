@@ -31,13 +31,12 @@
 
     {{--Employees--}}
     <x-admin.nav.employees></x-admin.nav.employees>
-{{--    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
+    <hr class="sidebar-divider">
 
-    <x-admin-addons></x-admin-addons>--}}
-
+    @can('viewAny', \App\Models\StockItem::class)
+    {{--Stock--}}
+    <x-admin.nav.stock></x-admin.nav.stock>
+    @endcan
 
     @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
     <!-- Divider -->

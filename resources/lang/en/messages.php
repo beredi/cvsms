@@ -115,6 +115,23 @@ return [
                 'logout' => 'Logout',
                 'logout_q' => 'Ready to leave?',
                 'logout_m' => 'Select "Logout" below if you are ready to end your current session.'
+            ],
+            'stock' => [
+                'name' => 'Stock',
+                'plural_name' => 'Stocks',
+                'open' => 'Open stock',
+                'new-record' => 'New item',
+                'update-record' => 'Update item',
+                'item' => [
+                    'name' => 'Name',
+                    'on_stock' => 'On stock (pieces)',
+                    'price' => 'Price (tax free)',
+                    'price_with_fee' => 'Price (with taxes 20%)',
+                    'purchase_price' => 'Purchase price'
+                ],
+                'created-item' => 'Item has been successfully added.',
+                'deleted-item' => 'Item has been successfully deleted.',
+                'updated-item' => 'Item has been successfully updated.'
             ]
         ],
         'general' => [

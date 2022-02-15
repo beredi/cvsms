@@ -115,6 +115,23 @@ return [
                 'logout' => 'Odjavi se',
                 'logout_q' => 'Spremni za odjavu?',
                 'logout_m' => 'Klinki "Odjavi se" ispod ako želiš da se odjaviš.'
+            ],
+            'stock' => [
+                'name' => 'Skladište',
+                'plural_name' => 'Skladišta',
+                'open' => 'Otvori skladište',
+                'new-record' => 'Dodaj stavku',
+                'update-record' => 'Ispravi stavku',
+                'item' => [
+                    'name' => 'Naziv',
+                    'on_stock' => 'Na skladištu (komada)',
+                    'price' => 'Cena (bez PDV) [RSD]',
+                    'price_with_fee' => 'Cena (sa PDV 20%) [RSD]',
+                    'purchase_price' => 'Nabavna cena [RSD]'
+                ],
+                'created-item' => 'Nova stavka je uspešno dodata.',
+                'deleted-item' => 'Stavka je uspešno izbrisana.',
+                'updated-item' => 'Stavka je uspešno ispravljena.'
             ]
         ],
         'general' => [

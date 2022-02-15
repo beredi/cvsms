@@ -91,6 +91,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/services/update/{service}', [\App\Http\Controllers\ServiceController::class, 'update'])->name('services.update');
     Route::get('/services/show/{service}', [\App\Http\Controllers\ServiceController::class, 'show'])->name('services.show');
 
+    Route::get('/stock', [\App\Http\Controllers\StockItemController::class, 'index'])->name('stock-item.all');
+    Route::get('/stock-item/create', [\App\Http\Controllers\StockItemController::class, 'create'])->name('stock-item.create');
+    Route::post('/stock-item/create', [\App\Http\Controllers\StockItemController::class, 'store'])->name('stock-item.store');
+    Route::delete('/stock-item', [\App\Http\Controllers\StockItemController::class, 'destroy'])->name('stock-item.delete');
+    Route::get('/stock-item/{stockItem}', [\App\Http\Controllers\StockItemController::class, 'edit'])->name('stock-item.edit');
+    Route::patch('/stock-item/{stockItem}', [\App\Http\Controllers\StockItemController::class, 'update'])->name('stock-item.update');
+
     Route::get('/changelog', [\App\Http\Controllers\HomeController::class, 'changelog'])->name('changelog');
     Route::get('/', function () {
         return view('admin.index');
