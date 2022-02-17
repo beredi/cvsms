@@ -65,18 +65,13 @@
     </div>
 @endsection
 @section('scripts')
-    <!-- Page level plugins -->
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <script>
         $(document).ready(function() {
             $('body').on('click','.delete-button',function (){
                 $('#thing_id').val($(this).data('id'));
             });
-        });
 
-        $(document).ready(function() {
             $('#all-stock-items').DataTable( {
                 "order": []
             } );

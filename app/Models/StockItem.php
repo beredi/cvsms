@@ -113,4 +113,12 @@ class StockItem extends Model
     public function getPriceWithFee(){
         return ($this->price + ($this->price * 20 / 100));
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function services(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

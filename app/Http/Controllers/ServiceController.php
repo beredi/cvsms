@@ -64,7 +64,7 @@ class ServiceController extends Controller
         $service->save();
         session()->flash('service-created', __('messages.admin.menu.services.messages.service_created'));
 
-        return redirect(route('services.all'));
+        return redirect(route('services.show', ['service' => $service->id]));
     }
 
     /**

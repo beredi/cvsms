@@ -64,4 +64,12 @@ class Service extends Model
         return $this->vehicle->customer;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function stock_items(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(StockItem::class);
+    }
+
 }

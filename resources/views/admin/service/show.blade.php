@@ -92,7 +92,22 @@
         </div>
     </div>
     <hr>
+    <div class="row mt-2">
+        <div class="col-md-1 col-sm-12 small mt-1">
+            <i class="fas fa-user-tie"></i> {{\Illuminate\Support\Str::upper(__('messages.admin.menu.employees.name'))}}
+        </div>
+        <div class="col-md-9 col-sm-12">
+            @include('admin.stock._allItems', ['items' => $service->stock_items])
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#all-stock-items').DataTable( {
+                "order": []
+            } );
+        });
+    </script>
 @endsection

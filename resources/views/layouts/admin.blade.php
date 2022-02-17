@@ -113,6 +113,10 @@
 <script src="{{asset('js/sb-admin-2.js')}}"></script>
 <script src="{{asset('js/standalone/selectize.js')}}"></script>
 @yield('scripts')
+
+<!-- Page level plugins -->
+<script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 </body>
 
 </html>
