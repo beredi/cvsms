@@ -66,9 +66,9 @@
 
 
                 <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('messages.admin.menu.service.new-record') }}
-                        </button>
+                    <button type="submit" class="btn btn-primary" name="save-service" value="save">
+                        {{ __('messages.admin.menu.service.new-record') }}
+                    </button>
                 </div>
             </form>
         </div>

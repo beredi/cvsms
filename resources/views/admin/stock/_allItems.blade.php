@@ -1,10 +1,3 @@
-@isset($hide)
-@else
-    @php
-        $hide = false;
-    @endphp
-@endisset
-
 <table id='all-stock-items' class="display" style="width:100%">
     <thead>
     <tr>

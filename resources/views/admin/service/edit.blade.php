@@ -74,8 +74,11 @@
 
 
                 <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" name="save-service" value="save">
                             {{ __('messages.admin.menu.services.update-record') }}
+                        </button>
+                        <button type="submit" class="btn btn-warning" name="save-service" value="addStockItem">
+                            <i class="fas fa-cart-plus"></i> {{ __('messages.admin.menu.services.add-stock-items') }}
                         </button>
                 </div>
             </form>

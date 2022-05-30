@@ -69,7 +69,9 @@ class Service extends Model
      */
     public function stock_items(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(StockItem::class);
+        return $this->belongsToMany(StockItem::class)
+            ->withTimestamps()
+            ->withPivot(['pieces']);
     }
 
 }

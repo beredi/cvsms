@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Service;
+use App\Models\StockItem;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,11 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Service::class);
+        $this->authorize("viewAny", Service::class);
 
-        return view('admin.service.index', ['services' => Service::all()->sortByDesc('id')]);
+        return view("admin.service.index", [
+            "services" => Service::all()->sortByDesc("id"),
+        ]);
     }
 
     /**
@@ -29,9 +32,11 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Service::class);
+        $this->authorize("create", Service::class);
 
-        return view('admin.service.create', ['customers' => Customer::all()->sortBy('name')]);
+        return view("admin.service.create", [
+            "customers" => Customer::all()->sortBy("name"),
+        ]);
     }
 
     /**
@@ -42,29 +47,33 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $vehicle = Vehicle::findOrFail($request->get('vehicle'));
+        $vehicle = Vehicle::findOrFail($request->get("vehicle"));
         $service = new Service();
         $service->vehicle()->associate($vehicle);
-        $service->name = $request->get('name');
-        $service->description = $request->get('description');
-        $service->kilometers = $request->get('kilometers');
-        $service->time_spent = $request->get('time_spent');
-        $service->price = $request->get('price');
-        $service->paid = $request->get('paid');
-        $service->date = $request->get('date');
+        $service->name = $request->get("name");
+        $service->description = $request->get("description");
+        $service->kilometers = $request->get("kilometers");
+        $service->time_spent = $request->get("time_spent");
+        $service->price = $request->get("price");
+        $service->paid = $request->get("paid");
+        $service->date = $request->get("date");
         $service->employee()->associate(Auth::user());
 
         // If customer didn't pay for service, set his 'owe'
-        if($service->price != $service->paid){
+        if ($service->price != $service->paid) {
             $customer = $service->customer();
             $customer->owe += $service->price - $service->paid;
             $customer->save();
         }
 
         $service->save();
-        session()->flash('service-created', __('messages.admin.menu.services.messages.service_created'));
+        session()->flash(
+            "service-created",
+            __("messages.admin.menu.services.messages.service_created")
+        );
 
-        return redirect(route('services.show', ['service' => $service->id]));
+        // Go back to service
+        return redirect(route("services.show", ["service" => $service->id]));
     }
 
     /**
@@ -75,9 +84,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        $this->authorize('view', $service);
+        $this->authorize("view", $service);
 
-        return view('admin.service.show', ['service' => $service]);
+        return view("admin.service.show", ["service" => $service]);
     }
 
     /**
@@ -88,11 +97,11 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        $this->authorize('update', $service);
+        $this->authorize("update", $service);
 
-        return view('admin.service.edit', [
-            'service' => $service,
-            'customers' => Customer::all()->sortBy('name')
+        return view("admin.service.edit", [
+            "service" => $service,
+            "customers" => Customer::all()->sortBy("name"),
         ]);
     }
 
@@ -105,31 +114,30 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        $this->authorize('update', $service);
+        $this->authorize("update", $service);
 
-        $vehicle = Vehicle::findOrFail($request->get('vehicle'));
+        $vehicle = Vehicle::findOrFail($request->get("vehicle"));
 
         $service->vehicle()->associate($vehicle);
-        $service->name = $request->get('name');
-        $service->description = $request->get('description');
-        $service->kilometers = $request->get('kilometers');
-        $service->time_spent = $request->get('time_spent');
-        $price = $request->get('price');
-        $paid = $request->get('paid');
-        $service->date = $request->get('date');
+        $service->name = $request->get("name");
+        $service->description = $request->get("description");
+        $service->kilometers = $request->get("kilometers");
+        $service->time_spent = $request->get("time_spent");
+        $price = $request->get("price");
+        $paid = $request->get("paid");
+        $service->date = $request->get("date");
         $service->employee()->associate(Auth::user());
 
         // Recalculate customer owe
-        if ($service->price != $price || $service->paid != $paid){
+        if ($service->price != $price || $service->paid != $paid) {
             $customer = $service->customer();
-            if ($service->price != $price && $service->paid == $paid){
+            if ($service->price != $price && $service->paid == $paid) {
                 $difference = $price - $service->price;
-            }
-            elseif ($service->price == $price && $service->paid != $paid){
+            } elseif ($service->price == $price && $service->paid != $paid) {
                 $difference = $service->paid - $paid;
-            }
-            else{
-                $difference = -1*($service->price - $service->paid) + ($price - $paid);
+            } else {
+                $difference =
+                    -1 * ($service->price - $service->paid) + ($price - $paid);
             }
             $customer->owe += $difference;
             $customer->save();
@@ -139,9 +147,12 @@ class ServiceController extends Controller
         $service->paid = $paid;
 
         $service->save();
-        session()->flash('service-updated', __('messages.admin.menu.services.messages.service_updated'));
+        session()->flash(
+            "service-updated",
+            __("messages.admin.menu.services.messages.service_updated")
+        );
 
-        return redirect(route('services.all'));
+        return redirect(route("services.all"));
     }
 
     /**
@@ -152,11 +163,97 @@ class ServiceController extends Controller
      */
     public function destroy(Request $request)
     {
-        $service = Service::findOrFail($request->get('thing_id'));
-        $this->authorize('delete', $service);
+        $service = Service::findOrFail($request->get("thing_id"));
+        $this->authorize("delete", $service);
 
         $service->delete();
-        session()->flash('service-deleted', __('messages.admin.menu.services.messages.service_deleted'));
+        session()->flash(
+            "service-deleted",
+            __("messages.admin.menu.services.messages.service_deleted")
+        );
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function assignItemsToService(Request $request)
+    {
+        $service = Service::findOrFail($request->get("service_id"));
+        $this->authorize("update", $service);
+        $items = [];
+        $quantities = [];
+        foreach ($request->toArray() as $key => $value) {
+            if (strpos($key, "item") !== false) {
+                $items[] = $value;
+            }
+            if (strpos($key, "qty") !== false) {
+                $quantities[] = $value;
+            }
+        }
+
+        $errorQtyNames = [];
+        $errorAttachedNames = [];
+
+        foreach ($items as $key => $item_id) {
+            $item = StockItem::findOrFail($item_id);
+            if ($item->on_stock >= $quantities[$key]) {
+                if (
+                    !$service->stock_items()->find($item->id, ["stock_item_id"])
+                ) {
+                    $service
+                        ->stock_items()
+                        ->attach($item, ["pieces" => $quantities[$key]]);
+                    $item->on_stock = $item->on_stock - $quantities[$key];
+                    $item->save();
+                } else {
+                    $errorAttachedNames[] = $item->name;
+                }
+            } else {
+                $errorQtyNames[] = $item->name;
+            }
+        }
+
+        if (count($errorAttachedNames) > 0 || count($errorQtyNames) > 0) {
+            $errorMessages = "";
+            if (count($errorAttachedNames) > 0) {
+                $errorMessages =
+                    __(
+                        "messages.admin.menu.services.messages.items-already-attached"
+                    ) . implode(", ", $errorAttachedNames);
+            }
+            if (count($errorQtyNames) > 0) {
+                if ($errorMessages !== "") {
+                    $errorMessages .= "; ";
+                }
+                $errorMessages .=
+                    __(
+                        "messages.admin.menu.services.messages.items-qty-not-fit"
+                    ) . implode(", ", $errorQtyNames);
+            }
+            session()->flash("items-errors", $errorMessages);
+        }
+        return redirect()->back();
+    }
+
+    /**
+     * @param Service $service
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function detachItem(Service $service, Request $request)
+    {
+        $item = StockItem::findOrFail($request->get("item_id"));
+        $pieces = $service
+            ->stock_items()
+            ->findOrFail($item->id, ["stock_item_id"])->pivot->pieces;
+        $item->on_stock += $pieces;
+        $item->save();
+
+        $service->stock_items()->detach($item);
 
         return redirect()->back();
     }

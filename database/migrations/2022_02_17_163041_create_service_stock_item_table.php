@@ -13,11 +13,12 @@ class CreateServiceStockItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_stock_item', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('service_id')->unsigned();
-            $table->integer('stock_item_id')->unsigned();
+        Schema::create("service_stock_item", function (Blueprint $table) {
+            $table->increments("id");
+            $table->integer("service_id")->unsigned();
+            $table->integer("stock_item_id")->unsigned();
             $table->timestamps();
+            $table->integer("pieces")->default(1);
         });
     }
 
@@ -28,6 +29,6 @@ class CreateServiceStockItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_stock_item');
+        Schema::dropIfExists("service_stock_item");
     }
 }
