@@ -33,6 +33,10 @@
     <x-admin.nav.employees></x-admin.nav.employees>
     <hr class="sidebar-divider">
 
+    {{--Invoice--}}
+    <x-admin.nav.invoice></x-admin.nav.invoice>
+    <hr class="sidebar-divider">
+
     @can('viewAny', \App\Models\StockItem::class)
     {{--Stock--}}
     <x-admin.nav.stock></x-admin.nav.stock>

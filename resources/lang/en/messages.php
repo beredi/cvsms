@@ -157,6 +157,14 @@ return [
                 "deleted-item" => "Item has been successfully deleted.",
                 "updated-item" => "Item has been successfully updated.",
             ],
+            "invoice" => [
+                "name" => "Invoice",
+                "plural_name" => "Invoices",
+                "new-record" => "New invoice",
+                "update-record" => "Update invoice",
+                "all-records" => "All invoices",
+                "invoice" => [],
+            ],
         ],
         "general" => [
             "search-for" => "Search for...",

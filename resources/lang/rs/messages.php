@@ -151,6 +151,14 @@ return [
                 "deleted-item" => "Stavka je uspešno izbrisana.",
                 "updated-item" => "Stavka je uspešno ispravljena.",
             ],
+            "invoice" => [
+                "name" => "Faktura",
+                "plural_name" => "Fakture",
+                "new-record" => "Nova faktura",
+                "update-record" => "Ažuriraj fakturu",
+                "all-records" => "Sve fakture",
+                "invoice" => [],
+            ],
         ],
         "general" => [
             "search-for" => "Traži...",
