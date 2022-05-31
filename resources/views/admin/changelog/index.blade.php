@@ -19,6 +19,15 @@
         </tfoot>
         <tbody>
             <tr>
+                <td width="10%">31. 05. 2022</td>
+                <td width="10%">Beta 1.18</td>
+                <td>
+                    <ul>
+                        <li>Added Company</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td width="10%">30. 05. 2022</td>
                 <td width="10%">Beta 1.17</td>
                 <td>
