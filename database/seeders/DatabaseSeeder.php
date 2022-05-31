@@ -74,6 +74,12 @@ class DatabaseSeeder extends Seeder
                 ->attach($permission);
         }
 
+        // CREATE DEFAULT COMPANY
+        Company::create([
+            "name" => "My company",
+            "is_company_app_owner" => true,
+        ]);
+
         /*\App\Models\User::factory(10)->create();
          \App\Models\Customer::factory(50)->create();*/
 

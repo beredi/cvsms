@@ -33,7 +33,6 @@ class Company extends Model
         "email",
         "pib",
         "unique_number",
-        "date_invoice",
         "bank_account",
         "is_company_app_owner",
         "logo",

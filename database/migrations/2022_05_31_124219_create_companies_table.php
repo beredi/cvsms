@@ -24,7 +24,6 @@ class CreateCompaniesTable extends Migration
             $table->string("pib")->nullable();
             $table->string("unique_number")->nullable();
             $table->string("bank_account")->nullable();
-            $table->date("date_invoice")->nullable();
             $table->boolean("is_company_app_owner")->default(false);
             $table->string("logo")->nullable();
             $table->timestamps();

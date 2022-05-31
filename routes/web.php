@@ -30,7 +30,8 @@ Route::prefix("admin")
     ->group(function () {
         $session = new Symfony\Component\HttpFoundation\Session\Session();
         App::setLocale($session->get("lang"));
-        //    Customers
+
+        //  CUSTOMERS
         Route::get("/customers", [
             \App\Http\Controllers\CustomerController::class,
             "index",
@@ -64,6 +65,7 @@ Route::prefix("admin")
             "vehicleHandler",
         ])->name("customer.vehicleHandler");
 
+        // EMPLOYEES
         Route::get("/employees", [
             \App\Http\Controllers\UserController::class,
             "index",
@@ -300,6 +302,16 @@ Route::prefix("admin")
             \App\Http\Controllers\StockItemController::class,
             "getItemQtyByID",
         ])->name("stock-item.get-stock-item-qty-by-id");
+
+        // COMPANIES
+        Route::get("/company/{company}", [
+            \App\Http\Controllers\CompanyController::class,
+            "edit",
+        ])->name("companies.edit");
+        Route::patch("/company/{company}", [
+            \App\Http\Controllers\CompanyController::class,
+            "update",
+        ])->name("companies.update");
 
         // CHANGELOG
         Route::get("/changelog", [
