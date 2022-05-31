@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Permission;
 use App\Models\Role;
@@ -20,18 +21,19 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Permission::class);
-        $permissions = array(
-            'user' => User::getPermissions(),
-            'customers' => Customer::getPermissions(),
-            'vehicles' => Vehicle::getPermissions(),
-            'services' => Service::getPermissions(),
-            'stock' => StockItem::getPermissions()
-        );
-        return view('admin.admin.permissions', [
-            'roles' => Role::all(),
-            'permissions' => $permissions,
-            'userRole' => Role::where('slug', Role::USER)->first()
+        $this->authorize("viewAny", Permission::class);
+        $permissions = [
+            "user" => User::getPermissions(),
+            "customers" => Customer::getPermissions(),
+            "vehicles" => Vehicle::getPermissions(),
+            "services" => Service::getPermissions(),
+            "stock" => StockItem::getPermissions(),
+            "company" => Company::getPermissions(),
+        ];
+        return view("admin.admin.permissions", [
+            "roles" => Role::all(),
+            "permissions" => $permissions,
+            "userRole" => Role::where("slug", Role::USER)->first(),
         ]);
     }
 
@@ -105,23 +107,32 @@ class PermissionController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajaxHandler(Request $request){
-        $roleSlug = $request->get('roleSlug');
-        $permissionsArray = Role::where('slug', $roleSlug)->first()->permissionsToArray();
+    public function ajaxHandler(Request $request)
+    {
+        $roleSlug = $request->get("roleSlug");
+        $permissionsArray = Role::where("slug", $roleSlug)
+            ->first()
+            ->permissionsToArray();
 
         return response()->json($permissionsArray, 200);
     }
 
-    public function roleAttach(Request $request){
-        $checkedPermissions = $request->get('permissions-checked');
-        $role = Role::where('slug', $request->get('roleSlug'))->first();
+    public function roleAttach(Request $request)
+    {
+        $checkedPermissions = $request->get("permissions-checked");
+        $role = Role::where("slug", $request->get("roleSlug"))->first();
         $role->permissions()->detach();
 
-        foreach ($checkedPermissions as $rolePermission){
-            $role->permissions()->attach(Permission::where('slug', $rolePermission)->first());
+        foreach ($checkedPermissions as $rolePermission) {
+            $role
+                ->permissions()
+                ->attach(Permission::where("slug", $rolePermission)->first());
         }
 
-        session()->flash('permissions-updated', __('messages.admin.permissions.updated-message'));
+        session()->flash(
+            "permissions-updated",
+            __("messages.admin.permissions.updated-message")
+        );
 
         return redirect()->back();
     }

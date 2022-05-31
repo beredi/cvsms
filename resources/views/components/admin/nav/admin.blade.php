@@ -10,3 +10,9 @@
         <span>{{__('messages.admin.permissions.name')}}</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="{{route('permissions.all')}}">
+        <i class="fas fa-building"></i>
+        <span>{{__('messages.admin.company.name')}}</span>
+    </a>
+</li>
