@@ -77,11 +77,11 @@ class CompanyController extends Controller
             "logo" => "mimes:jpeg,bmp,png",
         ]);
         if ($validated) {
-            if ($request->logo !== "") {
+            if ($request->logo !== "" && $request->logo !== null) {
                 $path = public_path() . "/img/companies/" . $company->id . "/";
 
                 //code for remove old file
-                if ($company->logo != "" && $company->file != null) {
+                if ($company->logo != "" && $company->logo != null) {
                     $file_old = $path . $company->logo;
                     unlink($file_old);
                 }
@@ -90,9 +90,11 @@ class CompanyController extends Controller
                 $file = $request->logo;
                 $filename = $file->getClientOriginalName();
                 $file->move($path, $filename);
+                $company->update([
+                    "logo" => $filename,
+                ]);
             }
 
-            $request->logo = $filename;
             $company->update([
                 "name" => $request->name,
                 "street" => $request->street,
@@ -100,11 +102,11 @@ class CompanyController extends Controller
                 "city" => $request->city,
                 "zip" => $request->zip,
                 "email" => $request->email,
-                "logo" => $filename,
                 "unique_number" => $request->unique_number,
                 "pib" => $request->pib,
                 "bank_account" => $request->bank_account,
             ]);
+
             /*session()->flash(
                 "customer-updated",
                 __("messages.admin.menu.customers.updated_customer", [
