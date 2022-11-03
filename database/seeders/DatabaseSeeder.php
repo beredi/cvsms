@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Service;
@@ -57,6 +58,7 @@ class DatabaseSeeder extends Seeder
             Service::getPermissions(),
             StockItem::getPermissions(),
             Company::getPermissions(),
+            Invoice::getPermissions(),
         ];
         foreach ($allPermissions as $permissionsPerModel) {
             foreach ($permissionsPerModel as $slug => $name) {

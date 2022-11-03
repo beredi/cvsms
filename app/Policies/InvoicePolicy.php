@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Service;
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ServicePolicy
+class InvoicePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class ServicePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermission("VIEW_ALL_SERVICE");
+        return $user->hasPermission("VIEW_ALL_INVOICE");
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Service $service)
+    public function view(User $user, Invoice $invoice)
     {
-        return $user->hasPermission("VIEW_SERVICE");
+        return $user->hasPermission("VIEW_INVOICE");
     }
 
     /**
@@ -41,43 +41,41 @@ class ServicePolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermission("CREATE_SERVICE");
+        return $user->hasPermission("CREATE_INVOICE");
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Service $service)
+    public function update(User $user, Invoice $invoice)
     {
-        return $user->hasPermission("EDIT_SERVICE") ||
-            $user->id == $service->employee->id;
+        return $user->hasPermission("EDIT_INVOICE");
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Service $service)
+    public function delete(User $user, Invoice $invoice)
     {
-        return $user->hasPermission("DELETE_SERVICE") ||
-            $user->id == $service->employee->id;
+        return $user->hasPermission("DELETE_INVOICE");
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Service $service)
+    public function restore(User $user, Invoice $invoice)
     {
         //
     }
@@ -86,10 +84,10 @@ class ServicePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Service $service)
+    public function forceDelete(User $user, Invoice $invoice)
     {
         //
     }
