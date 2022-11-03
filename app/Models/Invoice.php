@@ -33,4 +33,13 @@ class Invoice extends Model
     {
         return self::$permissions;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
+     */
+    public function services()
+    {
+        return $this->hasMany(InvoiceItem::class, "invoice_id");
+    }
 }
