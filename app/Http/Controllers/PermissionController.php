@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Service;
@@ -29,6 +30,7 @@ class PermissionController extends Controller
             "services" => Service::getPermissions(),
             "stock" => StockItem::getPermissions(),
             "company" => Company::getPermissions(),
+            "invoice" => Invoice::getPermissions(),
         ];
         return view("admin.admin.permissions", [
             "roles" => Role::all(),
