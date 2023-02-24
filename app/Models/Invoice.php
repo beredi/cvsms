@@ -38,8 +38,23 @@ class Invoice extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      *
      */
-    public function services()
+    public function invoiceItems()
     {
         return $this->hasMany(InvoiceItem::class, "invoice_id");
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getPrice()
+    {
+        $price = 0;
+        foreach ($this->invoiceItems as $invoiceItem) {
+            $price +=
+                $invoiceItem->class_name::findOrFail($invoiceItem->item_id)
+                    ->price * $invoiceItem->pieces;
+        }
+
+        return $price;
     }
 }

@@ -14,7 +14,11 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize("viewAny", Invoice::class);
+
+        return view("admin.invoice.index", [
+            "invoices" => Invoice::all()->sortByDesc("id"),
+        ]);
     }
 
     /**
@@ -46,7 +50,9 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        $this->authorize("view", $invoice);
+
+        return view("admin.invoice.show", ["invoice" => $invoice]);
     }
 
     /**
@@ -81,5 +87,20 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return void
+     */
+    public function doPay(Invoice $invoice)
+    {
+        $this->authorize("update", $invoice);
+
+        $invoice->date_paid = new \DateTime();
+        $invoice->paid = true;
+        $invoice->save();
+
+        return redirect()->back();
     }
 }

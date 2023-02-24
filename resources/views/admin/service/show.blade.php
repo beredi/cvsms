@@ -31,6 +31,12 @@
             >
                 <i class="fas fa-cart-plus" ></i> {{ __('messages.admin.menu.services.add-stock-items') }}
             </a>
+            <a
+                href="{{route('services.to-invoice', ['service' => $service->id])}}"
+                class="btn btn-success btn-sm"
+            >
+                <i class="fas fa-dollar-sign"></i> {{ __('messages.admin.menu.service.to-invoice') }}
+            </a>
         </div>
     </div>
     <hr>

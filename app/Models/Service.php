@@ -69,10 +69,29 @@ class Service extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+
     public function stock_items(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(StockItem::class)
             ->withTimestamps()
             ->withPivot(["pieces"]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function invoices()
+    {
+        return InvoiceItem::where("class_name", "Service")
+            ->where("item_id", $this->id)
+            ->get();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasInvoices()
+    {
+        return count($this->invoices()) > 0;
     }
 }

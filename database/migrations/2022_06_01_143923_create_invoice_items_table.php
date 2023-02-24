@@ -22,6 +22,7 @@ class CreateInvoiceItemsTable extends Migration
                 ->foreign("invoice_id")
                 ->references("id")
                 ->on("invoices");
+            $table->integer("pieces")->default(1);
             $table->timestamps();
         });
     }

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use App\Models\Service;
 use App\Models\StockItem;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\In;
 
 class ServiceController extends Controller
 {
@@ -256,5 +259,35 @@ class ServiceController extends Controller
         $service->stock_items()->detach($item);
 
         return redirect()->back();
+    }
+
+    /**
+     * @param Service $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function toInvoice(Service $service)
+    {
+        $invoice = new Invoice();
+        $invoice->date_invoice = new \DateTime();
+        if ($service->paid) {
+            $invoice->paid = true;
+        }
+        $invoice->save();
+
+        $serviceItem = new InvoiceItem();
+        $serviceItem->class_name = Service::class;
+        $serviceItem->item_id = $service->id;
+        $serviceItem->invoice_id = $invoice->id;
+        $invoice->invoiceItems()->save($serviceItem);
+
+        foreach ($service->stock_items as $stock_item) {
+            $stockItem = new InvoiceItem();
+            $stockItem->class_name = StockItem::class;
+            $stockItem->item_id = $stock_item->id;
+            $stockItem->invoice_id = $invoice->id;
+            $stockItem->pieces = $stock_item->pivot->pieces;
+            $invoice->invoiceItems()->save($stockItem);
+        }
+        return redirect(route("invoices.show", ["invoice" => $invoice]));
     }
 }

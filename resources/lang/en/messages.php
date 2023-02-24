@@ -11,6 +11,7 @@ return [
                 "name" => "Service",
                 "new-record" => "Add service record",
                 "all-records" => "All service records",
+                "to-invoice" => "To invoice",
             ],
             "vehicles" => [
                 "name" => "Vehicle",
@@ -163,7 +164,15 @@ return [
                 "new-record" => "New invoice",
                 "update-record" => "Update invoice",
                 "all-records" => "All invoices",
-                "invoice" => [],
+                "invoice" => [
+                    "date_invoice" => "Date of invoice",
+                    "date-paid" => "Date of payment",
+                    "paid" => "Paid",
+                ],
+                "invoice-items" => [
+                    "name" => "Item",
+                    "plural_name" => "Items",
+                ],
             ],
             "company" => [
                 "name" => "Company",
@@ -200,6 +209,8 @@ return [
             "version" => "Version",
             "show" => "Show",
             "back_to" => "Back to :where",
+            "yes" => "Yes",
+            "no" => "No",
         ],
         "validator" => [
             "required" => "The field :field is required.",

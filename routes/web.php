@@ -266,6 +266,10 @@ Route::prefix("admin")
             \App\Http\Controllers\ServiceController::class,
             "detachItem",
         ])->name("services.detach-item");
+        Route::get("/services/{service}/to-invoice", [
+            \App\Http\Controllers\ServiceController::class,
+            "toInvoice",
+        ])->name("services.to-invoice");
 
         // STOCK
         Route::get("/stock", [
@@ -312,6 +316,20 @@ Route::prefix("admin")
             \App\Http\Controllers\CompanyController::class,
             "update",
         ])->name("companies.update");
+
+        // INVOICES
+        Route::get("/invoices", [
+            \App\Http\Controllers\InvoiceController::class,
+            "index",
+        ])->name("invoices.all");
+        Route::get("/invoices/show/{invoice}", [
+            \App\Http\Controllers\InvoiceController::class,
+            "show",
+        ])->name("invoices.show");
+        Route::get("/invoices/pay/{invoice}", [
+            \App\Http\Controllers\InvoiceController::class,
+            "doPay",
+        ])->name("invoices.pay");
 
         // CHANGELOG
         Route::get("/changelog", [

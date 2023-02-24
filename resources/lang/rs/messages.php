@@ -11,6 +11,7 @@ return [
                 "name" => "Servis",
                 "new-record" => "Nova evidencija o servisu",
                 "all-records" => "Sve evidencije o servisima",
+                "to-invoice" => "Fakturisati",
             ],
             "vehicles" => [
                 "name" => "Vozilo",
@@ -157,7 +158,15 @@ return [
                 "new-record" => "Nova faktura",
                 "update-record" => "Ažuriraj fakturu",
                 "all-records" => "Sve fakture",
-                "invoice" => [],
+                "invoice" => [
+                    "date_invoice" => "Datum fakturizacije",
+                    "date-paid" => "Datum plaćanja",
+                    "paid" => "Plaćeno",
+                ],
+                "invoice-items" => [
+                    "name" => "Stavka",
+                    "plural_name" => "Stavke",
+                ],
             ],
             "company" => [
                 "name" => "Kompanija",
@@ -194,6 +203,8 @@ return [
             "version" => "Verzija",
             "show" => "Prikaži",
             "back_to" => "Nazad na :where",
+            "yes" => "Da",
+            "no" => "Ne",
         ],
         "validator" => [
             "required" => "Polje :field je obavezno.",

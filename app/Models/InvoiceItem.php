@@ -13,7 +13,7 @@ class InvoiceItem extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ["class_name", "item_id"];
+    protected $fillable = ["invoice_id", "class_name", "item_id", "pieces"];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
